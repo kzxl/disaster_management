@@ -9,7 +9,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\Images\coronavirus.png" />
+    <None Remove="Views\Images\cow.png" />
+    <None Remove="Views\Images\extreme-weather.png" />
+    <None Remove="Views\Images\global.png" />
+    <None Remove="Views\Images\house.png" />
+    <None Remove="Views\Images\log-out.png" />
+    <None Remove="Views\Images\question-mark.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Images\coronavirus.png" />
+    <Resource Include="Views\Images\cow.png" />
+    <Resource Include="Views\Images\extreme-weather.png" />
+    <Resource Include="Views\Images\global.png" />
+    <Resource Include="Views\Images\house.png" />
+    <Resource Include="Views\Images\log-out.png" />
+    <Resource Include="Views\Images\question-mark.png" />
   </ItemGroup>
 
 </Project>

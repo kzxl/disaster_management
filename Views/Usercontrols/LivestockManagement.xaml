@@ -1,0 +1,2078 @@
+﻿<UserControl
+    x:Class="disaster_management.Views.Usercontrols.LivestockManagement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:disaster_management.Views.Usercontrols"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="White"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <!--  TabControl Style  -->
+        <Style x:Key="tc1" TargetType="TabControl">
+            <Setter Property="Background" Value="#F0F0F0" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#CCCCCC" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+
+        <!--  TabItem Style  -->
+        <Style TargetType="TabItem">
+            <Setter Property="Padding" Value="0,0,0,0" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <!--  Border chứa tiêu đề  -->
+                        <Border
+                            x:Name="border" 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="5">
+                            <!--  StackPanel chứa Header  -->
+                            <Grid>
+                                <!--  LayoutTransform để phóng tiêu đề  -->
+                                <Grid.LayoutTransform>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="2" />
+                                </Grid.LayoutTransform>
+                                <ContentPresenter Margin="2"
+                                    x:Name="contentPresenter"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    ContentSource="Header"
+                                    RecognizesAccessKey="True" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--  Khi Tab được chọn  -->
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#3393DF" />
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="White" />
+                            </Trigger>
+                            <!--  Khi Tab được hover  -->
+                            <!--
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#AED581" />
+                            </Trigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  Title  -->
+        <Grid
+            Width="250"
+            HorizontalAlignment="Left"
+            Background="#3393DF">
+            <TextBlock
+                Margin="10,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="18"
+                Foreground="White"
+                Text="QUẢN LÝ CHĂN NUÔI" />
+        </Grid>
+
+        <TabControl Grid.Row="1" Style="{StaticResource tc1}">
+
+            <!--  Cục thú y  -->
+            <TabItem Header="Chi cục thú y">
+
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="160"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Tra cứu theo nhóm bệnh:
+                            </TextBlock>
+                            <ComboBox
+                                Width="160"
+                                Height="30"
+                                Margin="20,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14"
+                                Style="{StaticResource MahApps.Styles.ComboBox}">
+                                <ComboBoxItem IsSelected="True">Virus</ComboBoxItem>
+                                <ComboBoxItem>Vi Khuẩn</ComboBoxItem>
+                                <ComboBoxItem>Ký sinh</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            Header="Danh sách cục thú y: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="80"
+                                        Margin="0,0,5,0"
+                                        Content="Đầu" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Trước" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Tiếp" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,0,0"
+                                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU CỤC THÚ Y">
+                                <TabControl Style="{StaticResource tc1}">
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm  ">
+                                        <StackPanel>
+                                            <!--  Tên chi cục  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên chi cục:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Địa chỉ  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Số điện thoại  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Số điện thoại:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa  ">
+
+                                        <StackPanel>
+                                            <!--  ID chi cuc  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã chi cục:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <!--  Tên chi cục  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên chi cục:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Địa chỉ  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Số điện thoại  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Số điện thoại:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                SỬA
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá  ">
+                                        <!--  ID thien tai  -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã chi cục:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                </TabControl>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!--  Đại lý bán thuốc  -->
+            <TabItem Header="Đại lý bán thuốc">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="160"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Tra cứu theo trạng thái:
+                            </TextBlock>
+                            <ComboBox
+                                Width="160"
+                                Height="30"
+                                Margin="20,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14"
+                                Style="{StaticResource MahApps.Styles.ComboBox}">
+                                <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
+                                <ComboBoxItem>Đang xử lý</ComboBoxItem>
+                                <ComboBoxItem>Đã xử lý</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            Header="Danh đại lý bán thuốc: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="80"
+                                        Margin="0,0,5,0"
+                                        Content="Đầu" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Trước" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Tiếp" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,0,0"
+                                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU ĐẠI LÝ">
+                                <Grid>
+                                    
+                              
+                                <TabControl Style="{StaticResource tc1}">
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm">
+                                        <StackPanel>
+
+                                            <!--  Tên đại lý  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên đại lý:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Địa chỉ  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Số điện thoại  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Số điện thoại:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa">
+
+                                        <StackPanel>
+                                            <!--  ID ten dai li  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã đại lý:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <!--  Tên đại lý  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên đại lý:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Địa chỉ  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Số điện thoại  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Số điện thoại:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                SỬA
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá">
+                                        <!--  ID thien tai  -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã đại lý:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                    </TabControl>
+                                </Grid>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+
+            <!--  Khu tạm giữ, thiêu huỷ  -->
+            <TabItem Header="Khu tạm giữ, thiêu huỷ">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="160"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Tra cứu theo trạng thái:
+                            </TextBlock>
+                            <ComboBox
+                                Width="160"
+                                Height="30"
+                                Margin="20,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14"
+                                Style="{StaticResource MahApps.Styles.ComboBox}">
+                                <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
+                                <ComboBoxItem>Đang xử lý</ComboBoxItem>
+                                <ComboBoxItem>Đã xử lý</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            Header="Danh sách khu tạm giữ, tiêu huỷ: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="80"
+                                        Margin="0,0,5,0"
+                                        Content="Đầu" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Trước" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Tiếp" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,0,0"
+                                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU KHU TẠM GIỮ - TIÊU HUỶ">
+                                <TabControl>
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm">
+                                        <StackPanel>
+
+                                            <!--  ten khu  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên khu:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+
+                                            <!--  dia chi  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+
+                                            <!--  suc chưa  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Sức chứa:</TextBlock>
+                                                <mah:NumericUpDown Width="100" Value="0" />
+                                            </StackPanel>
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa">
+
+                                        <StackPanel>
+
+
+                                            <!--  ten khu  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên khu:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+
+                                            <!--  dia chi  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+
+                                            <!--  suc chưa  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Sức chứa:</TextBlock>
+                                                <mah:NumericUpDown Width="100" Value="0" />
+                                            </StackPanel>
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá">
+                                        <!--  ID khu tam giu  -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã khu:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                </TabControl>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!--  Cơ sở giết mổ  -->
+            <TabItem Header="Cơ sở giết mổ">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="120"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Tra cứu theo ngày:
+                            </TextBlock>
+                            <TextBlock
+                                Width="auto"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Bắt đầu:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <TextBlock
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Kết thúc:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <!--<ComboBox
+                             Width="160"
+                             Height="30"
+                             Margin="20,0,0,0"
+                             VerticalAlignment="Center"
+                             FontSize="14"
+                             Style="{StaticResource MahApps.Styles.ComboBox}">
+                             <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
+                             <ComboBoxItem>Đang xử lý</ComboBoxItem>
+                             <ComboBoxItem>Đã xử lý</ComboBoxItem>
+                         </ComboBox>-->
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            Header="Danh sách cơ sở giết mổ: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="80"
+                                        Margin="0,0,5,0"
+                                        Content="Đầu" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Trước" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Tiếp" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,0,0"
+                                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU CƠ Sở giết mổ">
+                                <TabControl>
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm">
+                                        <StackPanel>
+
+                                            <!--  Ten vacxin  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên cơ sở:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  ngay  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  suc chưa  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Sức chứa:</TextBlock>
+                                                <mah:NumericUpDown Width="100" Value="0" />
+                                            </StackPanel>
+
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa">
+
+                                        <StackPanel>
+
+
+                                            <!--  Ten vacxin  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên vacxin:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  ngay  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Ngày:</TextBlock>
+                                                <mah:DateTimePicker Width="160" />
+                                            </StackPanel>
+                                            <!--  O dich  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <Button Width="40" Margin="2,0,0,0">
+                                                    ...
+                                                </Button>
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá">
+                                        <!--  ID thien tai  -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã cơ sở:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                </TabControl>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+
+            <!--  Cơ sở chăn nuôi  -->
+            <TabItem Header="Cơ sở chăn nuôi">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="120"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Tra cứu theo ngày:
+                            </TextBlock>
+                            <TextBlock
+                                Width="auto"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Bắt đầu:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <TextBlock
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Kết thúc:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <!--<ComboBox
+              Width="160"
+              Height="30"
+              Margin="20,0,0,0"
+              VerticalAlignment="Center"
+              FontSize="14"
+              Style="{StaticResource MahApps.Styles.ComboBox}">
+              <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
+              <ComboBoxItem>Đang xử lý</ComboBoxItem>
+              <ComboBoxItem>Đã xử lý</ComboBoxItem>
+          </ComboBox>-->
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            Header="Danh sách triệu chứng lâm sàng: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="80"
+                                        Margin="0,0,5,0"
+                                        Content="Đầu" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Trước" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Tiếp" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,0,0"
+                                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU TRIỆU CHỨNG LÂM SÀNG">
+                                <TabControl>
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm">
+                                        <StackPanel>
+
+                                            <!--  Ten co so  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên cơ sở:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  dia chi  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  chu co so  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Chủ cơ sở:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  so dien thoai  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Số điện thoại:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa">
+
+                                        <StackPanel>
+
+                                            <!--  Ten co so  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên cơ sở:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  dia chi  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  chu co so  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Chủ cơ sở:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  so dien thoai  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Số điện thoại:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá">
+                                        <!--  ID thien tai  -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã cơ sở:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                </TabControl>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!--  Điều kiện chăn nuôi  -->
+            <TabItem Header="Điều kiện chăn nuôi">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="120"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Tra cứu theo ngày:
+                            </TextBlock>
+                            <TextBlock
+                                Width="auto"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Bắt đầu:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <TextBlock
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Kết thúc:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            Header="Danh sách thông tin điều kiện chăn nuôi: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="80"
+                                        Margin="0,0,5,0"
+                                        Content="Đầu" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Trước" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Tiếp" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,0,0"
+                                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU điều kiện chăn nuôi">
+                                <TabControl>
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm">
+                                        <StackPanel>
+
+
+                                            <!--  mo ta  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Thông tin:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  O dich  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Cơ sở chăn nuôi:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <Button Width="40" Margin="2,0,0,0">
+                                                    ...
+                                                </Button>
+                                            </StackPanel>
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa">
+
+                                        <StackPanel>
+
+                                            <!--  Ten triu chung  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên triệu chứng:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  mo ta  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  O dich  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <Button Width="40" Margin="2,0,0,0">
+                                                    ...
+                                                </Button>
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá">
+                                        <!--  ID thien tai  -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã triệu chứng:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                </TabControl>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!--  Giấy chứng nhận  -->
+            <TabItem Header="Giấy chứng nhận">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="120"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Tra cứu theo ngày:
+                            </TextBlock>
+                            <TextBlock
+                                Width="auto"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Bắt đầu:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <TextBlock
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Kết thúc:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <!--<ComboBox
+    Width="160"
+    Height="30"
+    Margin="20,0,0,0"
+    VerticalAlignment="Center"
+    FontSize="14"
+    Style="{StaticResource MahApps.Styles.ComboBox}">
+    <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
+    <ComboBoxItem>Đang xử lý</ComboBoxItem>
+    <ComboBoxItem>Đã xử lý</ComboBoxItem>
+</ComboBox>-->
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            Header="Danh sách triệu chứng lâm sàng: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="80"
+                                        Margin="0,0,5,0"
+                                        Content="Đầu" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Trước" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Tiếp" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,0,0"
+                                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU TRIỆU CHỨNG LÂM SÀNG">
+                                <TabControl>
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm">
+                                        <StackPanel>
+
+                                            <!--  Ten triu chung  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên triệu chứng:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  mo ta  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  O dich  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Cơ sở chăn nuôi:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <Button Width="40" Margin="2,0,0,0">
+                                                    ...
+                                                </Button>
+                                            </StackPanel>
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa">
+
+                                        <StackPanel>
+
+                                            <!--  Ten triu chung  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên triệu chứng:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  mo ta  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  O dich  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <Button Width="40" Margin="2,0,0,0">
+                                                    ...
+                                                </Button>
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá">
+                                        <!--  ID thien tai  -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã triệu chứng:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                </TabControl>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+
+            <!--  KẾT quả thống kê  -->
+            <TabItem Header="Thống kê">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="120"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Tra cứu theo ngày:
+                            </TextBlock>
+                            <TextBlock
+                                Width="auto"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Bắt đầu:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <TextBlock
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Kết thúc:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <!--<ComboBox
+    Width="160"
+    Height="30"
+    Margin="20,0,0,0"
+    VerticalAlignment="Center"
+    FontSize="14"
+    Style="{StaticResource MahApps.Styles.ComboBox}">
+    <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
+    <ComboBoxItem>Đang xử lý</ComboBoxItem>
+    <ComboBoxItem>Đã xử lý</ComboBoxItem>
+</ComboBox>-->
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            Header="Danh sách triệu chứng lâm sàng: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="80"
+                                        Margin="0,0,5,0"
+                                        Content="Đầu" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Trước" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Tiếp" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,0,0"
+                                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU TRIỆU CHỨNG LÂM SÀNG">
+                                <TabControl>
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm">
+                                        <StackPanel>
+
+                                            <!--  Ten triu chung  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên triệu chứng:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  mo ta  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  O dich  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <Button Width="40" Margin="2,0,0,0">
+                                                    ...
+                                                </Button>
+                                            </StackPanel>
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa">
+
+                                        <StackPanel>
+
+                                            <!--  Ten triu chung  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên triệu chứng:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  mo ta  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  O dich  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <Button Width="40" Margin="2,0,0,0">
+                                                    ...
+                                                </Button>
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá">
+                                        <!--  ID thien tai  -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã triệu chứng:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                </TabControl>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!--  Vùng an toàn dịch bệnh  -->
+            <TabItem Header="Vùng an toàn dịch bệnh">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="120"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Tra cứu theo ngày:
+                            </TextBlock>
+                            <TextBlock
+                                Width="auto"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Bắt đầu:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <TextBlock
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14">
+                                Kết thúc:
+                            </TextBlock>
+                            <mah:DateTimePicker Width="160" Height="30" />
+                            <!--<ComboBox
+    Width="160"
+    Height="30"
+    Margin="20,0,0,0"
+    VerticalAlignment="Center"
+    FontSize="14"
+    Style="{StaticResource MahApps.Styles.ComboBox}">
+    <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
+    <ComboBoxItem>Đang xử lý</ComboBoxItem>
+    <ComboBoxItem>Đã xử lý</ComboBoxItem>
+</ComboBox>-->
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            Header="Danh sách triệu chứng lâm sàng: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="80"
+                                        Margin="0,0,5,0"
+                                        Content="Đầu" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Trước" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,5,0"
+                                        Content="Tiếp" />
+                                    <Button
+                                        Width="80"
+                                        Margin="5,0,0,0"
+                                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU TRIỆU CHỨNG LÂM SÀNG">
+                                <TabControl>
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm">
+                                        <StackPanel>
+
+                                            <!--  Ten triu chung  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên triệu chứng:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  mo ta  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  O dich  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <Button Width="40" Margin="2,0,0,0">
+                                                    ...
+                                                </Button>
+                                            </StackPanel>
+
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa">
+
+                                        <StackPanel>
+
+                                            <!--  Ten triu chung  -->
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên triệu chứng:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  mo ta  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  O dich  -->
+                                            <StackPanel
+                                                Margin="10,5,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <Button Width="40" Margin="2,0,0,0">
+                                                    ...
+                                                </Button>
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá">
+                                        <!--  ID thien tai  -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                                Margin="10,20,0,0"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã triệu chứng:</TextBlock>
+                                                <mah:NumericUpDown Value="0" />
+                                            </StackPanel>
+                                            <Button
+                                                Height="40"
+                                                Margin="0,20,0,0"
+                                                FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                </TabControl>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <!--  END Title  -->
+
+
+
+    </Grid>
+</UserControl>

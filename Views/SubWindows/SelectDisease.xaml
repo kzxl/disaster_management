@@ -1,0 +1,16 @@
+﻿<mah:MetroWindow
+    x:Class="disaster_management.Views.SubWindows.SelectDisease"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:disaster_management.Views.SubWindows"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Lựa chọn loại dịch bệnh"
+    Width="600"
+    Height="400"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid />
+</mah:MetroWindow>
