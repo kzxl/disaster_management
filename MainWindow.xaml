@@ -209,9 +209,24 @@
 
             <!--  User control Menu  -->
             <Grid Grid.Column="1">
-                <uc:DisasterManagement Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=1}" />
-                <uc:DiseaseManagement Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=2}" />
+                <uc:DisasterManagement  Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=1}" />
+                <uc:DiseaseManagement DataContext="{Binding DiseaseViewModel}"  Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=2}" />
                 <uc:LivestockManagement Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=3}" />
+                <Button
+                    x:Name="button"
+                    Margin="128,117,1008,588"
+                    Command="{Binding TriggerChildCommand}"
+                    Content="Button"
+                    RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1" />
+                            <SkewTransform />
+                            <RotateTransform Angle="3.327" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
             </Grid>
             <!--  END User control Menu  -->
 

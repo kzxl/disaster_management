@@ -71,7 +71,8 @@
                                     <RowDefinition />
                                     <RowDefinition Height="50" />
                                 </Grid.RowDefinitions>
-                                <DataGrid
+                                <DataGrid ItemsSource="{Binding Diseases}"
+                                          SelectedItem="{Binding SelectedDisease}"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Background="AliceBlue" />
@@ -136,7 +137,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Tên dịch bệnh:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox  Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
                                             </StackPanel>
                                             <!--  mô tả chi tiết  -->
                                             <StackPanel
@@ -144,7 +145,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Mô tả chi tiết:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox  Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
                                             </StackPanel>
                                             <!--  cấp độ  -->
                                             <StackPanel
@@ -208,7 +209,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Tên dịch bệnh:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox Text="{Binding SelectedDisease.DiseaseName}" Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
                                             </StackPanel>
                                             <!--  mô tả chi tiết  -->
                                             <StackPanel
@@ -216,7 +217,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Mô tả chi tiết:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox Text="{Binding SelectedDisease.Description}" Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
                                             </StackPanel>
                                             <!--  cấp độ  -->
                                             <StackPanel

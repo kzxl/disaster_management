@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls;
+﻿using disaster_management.ViewModels;
+using MahApps.Metro.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,9 +19,11 @@ namespace disaster_management
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public MainWindow()
+
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel; // Gán ViewModel làm DataContext cho View
         }
     }
 }

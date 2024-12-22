@@ -1,4 +1,6 @@
-﻿using disaster_management.Views.SubWindows;
+﻿using disaster_management.ViewModels;
+using disaster_management.ViewModels.ChildViewModels;
+using disaster_management.Views.SubWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,10 @@ namespace disaster_management.Views.Usercontrols
         public DiseaseManagement()
         {
             InitializeComponent();
+         
         }
+    
+
 
         private void Button_ChonLoaiDichBenh(object sender, RoutedEventArgs e)
         {
