@@ -17,5 +17,10 @@ namespace disaster_management.Models
         public string? DiseaseGroup { get; set; }
 
         public virtual ICollection<Outbreak> Outbreaks { get; set; }
+        // Hàm sao chép (Shallow copy)
+        public DiseaseType Clone()
+        {
+            return (DiseaseType)this.MemberwiseClone();
+        }
     }
 }

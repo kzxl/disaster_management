@@ -1,4 +1,5 @@
-﻿using disaster_management.Models;
+﻿using disaster_management.DTOs;
+using disaster_management.Models;
 using disaster_management.Repositories;
 
 namespace disaster_management.Services
@@ -11,6 +12,7 @@ namespace disaster_management.Services
         Task UpdateAsync(DiseaseType entity);
         Task DeleteAsync(int id);
         Task<IEnumerable<DiseaseType>> GetBySeverityAsync(string severity);
+
     }
 
     public class DiseaseService : IDiseaseService
