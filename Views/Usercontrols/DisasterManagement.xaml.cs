@@ -1,7 +1,8 @@
-﻿using disaster_management.ViewModels;
-using MahApps.Metro.Controls;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace disaster_management
+namespace disaster_management.Views.Usercontrols
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DisasterManagement.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class DisasterManagement : UserControl
     {
-
-        public MainWindow(MainViewModel viewModel)
+        public DisasterManagement()
         {
             InitializeComponent();
-            DataContext = viewModel; // Gán ViewModel làm DataContext cho View
         }
     }
 }
