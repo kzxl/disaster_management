@@ -12,7 +12,7 @@ namespace disaster_management.Services
         Task UpdateAsync(DiseaseType entity);
         Task DeleteAsync(int id);
         Task<IEnumerable<DiseaseType>> GetBySeverityAsync(string severity);
-
+        Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword);
     }
 
     public class DiseaseService : IDiseaseService
@@ -51,6 +51,11 @@ namespace disaster_management.Services
         public async Task<IEnumerable<DiseaseType>> GetBySeverityAsync(string severity)
         {
           return await _repository.GetBySeverityAsync(severity);
+        }
+
+        public async Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword)
+        {
+            return await _repository.GetByNameSearch(keyword);
         }
 
       

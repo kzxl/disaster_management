@@ -50,19 +50,33 @@
                                 Width="160"
                                 VerticalAlignment="Center"
                                 FontSize="14">
-                                Tra cứu theo nhóm bệnh:
+                                Tra cứu theo tên dịch:
                             </TextBlock>
-                            <ComboBox
-                                Width="160"
-                                Height="30"
-                                Margin="20,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="14"
-                                Style="{StaticResource MahApps.Styles.ComboBox}">
-                                <ComboBoxItem IsSelected="True">Virus</ComboBoxItem>
-                                <ComboBoxItem>Vi Khuẩn</ComboBoxItem>
-                                <ComboBoxItem>Ký sinh</ComboBoxItem>
-                            </ComboBox>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox
+                                    Width="190"
+                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                    Text="{Binding KeywordName}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Command="{Binding SearchNameCommand}"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Command="{Binding LoadDiseasesCommand}"
+                                    Content="Làm mới"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
                         </StackPanel>
 
                         <GroupBox
@@ -81,7 +95,7 @@
                                     CanUserAddRows="False"
                                     CanUserDeleteRows="False"
                                     IsReadOnly="True"
-                                    ItemsSource="{Binding Diseases}"
+                                    ItemsSource="{Binding Pagination.PagedItems}"
                                     SelectedItem="{Binding SelectedDisease}" />
                                 <!--  phan trang  -->
                                 <StackPanel
@@ -94,18 +108,22 @@
                                     <Button
                                         Width="80"
                                         Margin="0,0,5,0"
+                                        Command="{Binding MoveFirstCommand}"
                                         Content="Đầu" />
                                     <Button
                                         Width="80"
                                         Margin="5,0,5,0"
+                                        Command="{Binding MovePreviousCommand}"
                                         Content="Trước" />
                                     <Button
                                         Width="80"
                                         Margin="5,0,5,0"
+                                        Command="{Binding MoveNextCommand}"
                                         Content="Tiếp" />
                                     <Button
                                         Width="80"
                                         Margin="5,0,0,0"
+                                        Command="{Binding MoveLastCommand}"
                                         Content="Cuối" />
                                 </StackPanel>
                             </Grid>
@@ -119,21 +137,25 @@
                     <Grid Grid.Column="1">
                         <StackPanel>
                             <!--  Timf kieems  -->
-                            <StackPanel
+                            <!--<StackPanel
                                 Margin="10,10,0,0"
                                 VerticalAlignment="Top"
                                 Orientation="Horizontal">
 
-                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <TextBox
+                                    Width="190"
+                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                    Text="{Binding KeywordName}" />
                                 <Button
                                     Width="90"
                                     Margin="5,0,0,0"
+                                    Command="{Binding SearchNameCommand}"
                                     Content="Tìm Kiếm"
                                     FontSize="16"
                                     Style="{StaticResource MahApps.Styles.Button}" />
-                            </StackPanel>
+                            </StackPanel>-->
                             <!--  Thao tac  -->
-                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU DỊCH BỆNH">
+                            <GroupBox Margin="10,70,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU DỊCH BỆNH">
                                 <TabControl>
                                     <!--  Thêm  -->
                                     <TabItem Header="Thêm">
@@ -147,7 +169,7 @@
                                                 <TextBox
                                                     Width="160"
                                                     Style="{StaticResource MahApps.Styles.TextBox}"
-                                                    Text="{Binding Disease.DiseaseName}" />
+                                                    Text="{Binding DiseaseAdd.DiseaseName}" />
                                             </StackPanel>
                                             <!--  mô tả chi tiết  -->
                                             <StackPanel
@@ -158,7 +180,7 @@
                                                 <TextBox
                                                     Width="160"
                                                     Style="{StaticResource MahApps.Styles.TextBox}"
-                                                    Text="{Binding Disease.Description}" />
+                                                    Text="{Binding DiseaseAdd.Description}" />
                                             </StackPanel>
                                             <!--  cấp độ  -->
                                             <StackPanel
@@ -184,7 +206,8 @@
                                                 <TextBlock Width="90" VerticalAlignment="Center">Nhóm bệnh:</TextBlock>
                                                 <ComboBox
                                                     Width="160"
-                                                    VerticalAlignment="Center"    SelectedIndex="{Binding DiseaseGroupIndexAdd}"
+                                                    VerticalAlignment="Center"
+                                                    SelectedIndex="{Binding DiseaseGroupIndexAdd}"
                                                     Style="{StaticResource MahApps.Styles.ComboBox}">
                                                     <ComboBoxItem IsSelected="True">Virus</ComboBoxItem>
                                                     <ComboBoxItem>Vi Khuẩn</ComboBoxItem>
@@ -195,9 +218,10 @@
 
 
 
-                                            <Button Command="{Binding AddDiseaseCommand}"
+                                            <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding AddDiseaseCommand}"
                                                 FontSize="18">
                                                 THÊM
                                             </Button>
@@ -297,11 +321,16 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Mã dịch bệnh:</TextBlock>
-                                                <mah:NumericUpDown Value="0" />
+                                                <TextBox
+                                                    Width="160"
+                                                    IsReadOnly="True"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding Disease.DiseaseId}" />
                                             </StackPanel>
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding DelDiseaseCommand}"
                                                 FontSize="18">
                                                 XOÁ
                                             </Button>

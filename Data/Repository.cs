@@ -24,7 +24,47 @@ namespace disaster_management.Data
             return await _dbSet.FindAsync(id);
         }
 
+
+
         public async Task AddAsync(T entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity), "The entity to add cannot be null.");
+
+            // Nếu thực thể đã được theo dõi, tách nó ra khỏi ChangeTracker
+            var trackedEntity = _context.ChangeTracker.Entries<T>()
+                .FirstOrDefault(e => e.Entity == entity);
+
+            if (trackedEntity != null)
+            {
+                trackedEntity.State = EntityState.Detached; // Tách thực thể đã được theo dõi
+            }
+
+            // Đặt giá trị của cột IDENTITY về null hoặc mặc định nếu tồn tại
+            var primaryKeyProperty = _context.Entry(entity).Properties
+                .FirstOrDefault(p => p.Metadata.IsPrimaryKey());
+
+            if (primaryKeyProperty != null && primaryKeyProperty.Metadata.IsPrimaryKey())
+            {
+                primaryKeyProperty.CurrentValue = null; // Đặt giá trị IDENTITY về null
+            }
+
+            // Thêm thực thể mới
+            await _dbSet.AddAsync(entity);
+
+            // Lưu thay đổi và xử lý ngoại lệ
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("An error occurred while saving the entity to the database. See inner exception for details.", ex);
+            }
+        }
+
+
+        public async Task AddAsync_BK(T entity)
         {
             // Kiểm tra thực thể đã được theo dõi
             var entityType = typeof(T);
