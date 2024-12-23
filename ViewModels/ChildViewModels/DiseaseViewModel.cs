@@ -12,17 +12,31 @@ namespace disaster_management.ViewModels.ChildViewModels
     {
         private readonly IDiseaseTypeService? _diseaseService;
         private readonly IOutbreakDiagnosisService? _outbreakDiagnosisService;
+        private readonly IOutbreakService? _outbreakService;
+        private readonly ISymptomService? _symptomService;
+        private readonly IVaccinationService? _vaccinationService;
 
         public DiseaseViewModel(
             IDiseaseTypeService diseaseService,
-            IOutbreakDiagnosisService? outbreakDiagnosisService)
+            IOutbreakDiagnosisService? outbreakDiagnosisService,
+            IOutbreakService outbreakService,
+            ISymptomService symptomService,
+            IVaccinationService vaccinationService)
         {
             _diseaseService = diseaseService;
             _outbreakDiagnosisService = outbreakDiagnosisService;
+            _outbreakService = outbreakService;
+            _symptomService = symptomService;
+            _vaccinationService = vaccinationService;
+           
+            // Load danh sách dịch bệnh
+            LoadDiseasesCommand = new AsyncRelayCommand(GetAllDiseasesAsync); // First load
            
 
-            LoadDiseasesCommand = new AsyncRelayCommand(GetAllDiseasesAsync); // First load
-            LoadDiseasesCommand.ExecuteAsync(null);
+            // Load danh sách chuản đoán
+            LoadODCommand = new AsyncRelayCommand(GetAllODAsync);
+
+            InitializeAsync();
 
             UpdateDiseaseCommand = new AsyncRelayCommand(UpdateDiseaseAsync);
             AddDiseaseCommand = new AsyncRelayCommand(AddDiseaseAsync);
@@ -36,7 +50,12 @@ namespace disaster_management.ViewModels.ChildViewModels
 
             // Search
             SearchNameCommand = new AsyncRelayCommand(GetBySearchNameAsync);
-            _outbreakDiagnosisService = outbreakDiagnosisService;
+          
+        }
+        private async void InitializeAsync()
+        {
+            await LoadDiseasesCommand.ExecuteAsync(null);
+            await LoadODCommand.ExecuteAsync(null);
         }
 
         #region Prop

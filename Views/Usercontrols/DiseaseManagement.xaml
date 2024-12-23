@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:disaster_management.Views.Usercontrols"
+    xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="600"
@@ -30,7 +31,8 @@
                 Text="QUẢN LÝ DỊCH BỆNH" />
         </Grid>
 
-        <TabControl Grid.Row="1" Style="{StaticResource MahApps.Styles.TabControl.ColorPicker}">
+        <TabControl Grid.Row="1" MouseDown="TabItem_MouseDown"
+                    Style="{StaticResource MahApps.Styles.TabControl.ColorPicker}">
 
             <!--  Quản Lý Dịch Bệnh  -->
             <TabItem Header="Quản Lý Dịch Bệnh">
@@ -632,8 +634,10 @@
 
 
             <!--  Chuẩn Đoán Ổ Dịch  -->
-            <TabItem Header="Chuẩn Đoán Ổ Dịch">
+            <TabItem Header="Chuẩn Đoán Ổ Dịch" >
+               
                 <Grid Margin="10,0,0,0">
+                   
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="1.2*" />
@@ -651,17 +655,31 @@
                                 FontSize="14">
                                 Tra cứu theo trạng thái:
                             </TextBlock>
-                            <ComboBox
-                                Width="160"
-                                Height="30"
-                                Margin="20,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="14"
-                                Style="{StaticResource MahApps.Styles.ComboBox}">
-                                <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
-                                <ComboBoxItem>Đang xử lý</ComboBoxItem>
-                                <ComboBoxItem>Đã xử lý</ComboBoxItem>
-                            </ComboBox>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox
+                                    Width="190"
+                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                    />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                   
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Command="{Binding LoadODCommand}"
+                                    Content="Làm mới"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
                         </StackPanel>
 
                         <GroupBox
@@ -676,7 +694,8 @@
                                 <DataGrid
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Background="AliceBlue" />
+                                    Background="AliceBlue"
+                                    ItemsSource="{Binding Pagination_OD.PagedItems}" />
                                 <!--  phan trang  -->
                                 <StackPanel
                                     Grid.Row="1"
@@ -739,7 +758,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Kết quả:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding OutbreakDia.DiagnosisResult}" />
                                             </StackPanel>
                                             <!--  ngay  -->
                                             <StackPanel
@@ -747,7 +769,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Ngày:</TextBlock>
-                                                <mah:DateTimePicker Width="160" />
+                                                <mah:DateTimePicker Width="160" SelectedDateTime="{Binding OutbreakDia.DiagnosisDate}" />
                                             </StackPanel>
                                             <!--  Bac Si  -->
                                             <StackPanel

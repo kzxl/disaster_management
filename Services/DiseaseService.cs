@@ -116,7 +116,8 @@ namespace disaster_management.Services
         #region Chuan doan o dich
         async Task<IEnumerable<OutbreakDiagnosis>> IOutbreakDiagnosisService.GetAllAsync()
         {
-            return await _repositoryOutbreakDiagnosis.GetAllAsync();
+            var temp = await _repositoryOutbreakDiagnosis.GetAllAsync();
+            return temp;
         }
         async Task<OutbreakDiagnosis?> IOutbreakDiagnosisService.GetByIdAsync(int id)
         {

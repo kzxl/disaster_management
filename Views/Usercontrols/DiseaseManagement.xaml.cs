@@ -1,20 +1,8 @@
 ﻿using disaster_management.ViewModels;
 using disaster_management.ViewModels.ChildViewModels;
 using disaster_management.Views.SubWindows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace disaster_management.Views.Usercontrols
 {
@@ -26,10 +14,21 @@ namespace disaster_management.Views.Usercontrols
         public DiseaseManagement()
         {
             InitializeComponent();
-         
+           // Loaded += DiseaseManagement_Loaded;
         }
-    
 
+        private void DiseaseManagement_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Lấy ViewModel từ DataContext
+            if (DataContext is DiseaseViewModel viewModel)
+            {
+                // Gọi Command từ ViewModel
+                if (viewModel.LoadODCommand.CanExecute(null))
+                {
+                    viewModel.LoadODCommand.Execute(null);
+                }
+            }
+        }
 
         private void Button_ChonLoaiDichBenh(object sender, RoutedEventArgs e)
         {
@@ -41,6 +40,11 @@ namespace disaster_management.Views.Usercontrols
         {
             SelectOutbreak selectOutbreak = new SelectOutbreak();
             selectOutbreak.ShowDialog();
+        }
+
+        private void TabItem_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+           
         }
     }
 }
