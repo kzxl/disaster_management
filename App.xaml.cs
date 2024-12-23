@@ -40,7 +40,7 @@ namespace disaster_management
             var services = new ServiceCollection();
 
             services.AddDbContext<DaDManagementContext>(options =>
-                options.UseSqlServer("Server=DESKTOP-JMJDD80\\SQLEXPRESS;Database=DaDManagement;User Id=sa;Password=Admin@1234;"));
+                options.UseSqlServer("Server=NGUYENMINHCHAUM\\SQLEXPRESS;Database=DaDManagement;User Id=sa;Password=Admin@1234;"));
 
             // Đăng ký Repository
             services.AddScoped<DiseaseRepository>();

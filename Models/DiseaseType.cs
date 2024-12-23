@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace disaster_management.Models
 {
@@ -10,6 +11,7 @@ namespace disaster_management.Models
             Outbreaks = new HashSet<Outbreak>();
         }
 
+       
         public int DiseaseId { get; set; }
         public string DiseaseName { get; set; } = null!;
         public string? Description { get; set; }

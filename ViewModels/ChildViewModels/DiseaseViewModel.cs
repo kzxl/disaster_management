@@ -2,12 +2,12 @@
 using CommunityToolkit.Mvvm.Input;
 using disaster_management.Models;
 using disaster_management.Services;
+using disaster_management.ViewModels.Utils;
 using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace disaster_management.ViewModels.ChildViewModels
 {
-
     public class DiseaseViewModel : ObservableObject
     {
         private readonly IDiseaseService? _diseaseService;
@@ -16,11 +16,22 @@ namespace disaster_management.ViewModels.ChildViewModels
         {
             _diseaseService = diseaseService;
 
-             LoadDiseasesCommand = new AsyncRelayCommand(GetAllDiseasesAsync); // First load
+            LoadDiseasesCommand = new AsyncRelayCommand(GetAllDiseasesAsync); // First load
             LoadDiseasesCommand.ExecuteAsync(null);
 
             UpdateDiseaseCommand = new AsyncRelayCommand(UpdateDiseaseAsync);
             AddDiseaseCommand = new AsyncRelayCommand(AddDiseaseAsync);
+            DelDiseaseCommand = new AsyncRelayCommand(DeleteDiseaseAsync);
+
+            // paging command
+            MoveFirstCommand = new RelayCommand(MoveFirst);
+            MovePreviousCommand = new RelayCommand(MovePrevious);
+            MoveNextCommand = new RelayCommand(MoveNext);
+            MoveLastCommand = new RelayCommand(MoveLast);
+
+            // Search
+            SearchNameCommand = new AsyncRelayCommand(GetBySearchNameAsync);
+           
         }
 
         #region Prop
@@ -65,8 +76,6 @@ namespace disaster_management.ViewModels.ChildViewModels
             set { _diseaseGroupIndexAdd = value; OnPropertyChanged(); }
         }
 
-
-
         private DiseaseType _SelectedDisease;
         public DiseaseType SelectedDisease
         {
@@ -74,9 +83,13 @@ namespace disaster_management.ViewModels.ChildViewModels
             set
             {
                 SetProperty(ref _SelectedDisease, value);
-                Disease = value.Clone(); // Create a copy
-                GetSeverityIndex(SelectedDisease);
-                GetGroupIndex(SelectedDisease);
+                if(value!= null)
+                {
+                    Disease = value.Clone(); // Create a copy
+                    GetSeverityIndex(SelectedDisease);
+                    GetGroupIndex(SelectedDisease);
+                }
+             
             }
         }
 
@@ -87,18 +100,42 @@ namespace disaster_management.ViewModels.ChildViewModels
             set
             {
                 SetProperty(ref _SelectedDiseaseAdd, value);
-                Disease = value.Clone(); // Create a copy
+              //  Disease = value.Clone(); // Create a copy
              
             }
         }
 
-        private DiseaseType _Disease;
+        // Add Data
+        private DiseaseType _DiseaseAdd = new();
+        public DiseaseType DiseaseAdd
+        {
+            get { return _DiseaseAdd; }
+            set => SetProperty(ref _DiseaseAdd, value);
+        }
+
+        // Update Data
+
+        private DiseaseType _Disease = new() ;
         public DiseaseType Disease
         {
             get { return _Disease; }
             set => SetProperty(ref _Disease, value);
         }
 
+
+        private string _keywordName = string.Empty;
+        public string KeywordName
+        {
+            get { return _keywordName; }
+            set
+            {
+                if (_keywordName != value)
+                {
+                    _keywordName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private void GetSeverityIndex(DiseaseType diseaseType)
         {
@@ -145,14 +182,17 @@ namespace disaster_management.ViewModels.ChildViewModels
             if (index == 0)
             {
                 Disease.Severity = "Nhẹ";
+                DiseaseAdd.Severity = "Nhẹ";
             }
             else if (index == 1)
             {
                 Disease.Severity = "Cảnh báo";
+                DiseaseAdd.Severity = "Cảnh báo";
             }
             else if (index == 2)
             {
                 Disease.Severity = "Nguy hiểm";
+                DiseaseAdd.Severity = "Nguy hiểm";
             }
         }
 
@@ -161,23 +201,56 @@ namespace disaster_management.ViewModels.ChildViewModels
             if (index == 0)
             {
                 Disease.DiseaseGroup = "Virus";
+                DiseaseAdd.DiseaseGroup = "Virus";
             }
             else if (index == 1)
             {
                 Disease.DiseaseGroup = "Vi Khuẩn";
+                DiseaseAdd.DiseaseGroup = "Vi Khuẩn";
             }
             else if (index == 2)
             {
                 Disease.DiseaseGroup = "Ký Sinh";
+                DiseaseAdd.DiseaseGroup = "Ký Sinh";
             }
         }
 
+        #region Pagination prop
+
+        private PaginationHelper<DiseaseType> _Pagination;
+        public PaginationHelper<DiseaseType> Pagination
+        {
+            get { return _Pagination; }
+            set
+            {
+                if (_Pagination != value)
+                {
+                    _Pagination = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int CurrentPage => Pagination.CurrentPage;
+        public int TotalPages => Pagination.TotalPages;
+        #endregion Pagination prop
 
         #endregion Prop
 
-        // Thực hiện load toàn bộ du liệu dịch bệnh
-        public IAsyncRelayCommand LoadDiseasesCommand { get; }
+        #region Pagination
+        public IRelayCommand MoveFirstCommand { get; }
+        public IRelayCommand MovePreviousCommand { get; }
+        public IRelayCommand MoveNextCommand { get; }
+        public IRelayCommand MoveLastCommand { get; }
+        public void MoveFirst() => Pagination.MoveFirst();
+        public void MovePrevious() => Pagination.MovePrevious();
+        public void MoveNext() => Pagination.MoveNext();
+        public void MoveLast() => Pagination.MoveLast();
+        #endregion Pagination
 
+        #region CRUD
+        // Download all disease data
+        public IAsyncRelayCommand LoadDiseasesCommand { get; }
         private async Task GetAllDiseasesAsync()
         {
             if (_diseaseService is null)
@@ -186,9 +259,25 @@ namespace disaster_management.ViewModels.ChildViewModels
             }
             var diseases = await _diseaseService.GetAllAsync();
             Diseases = new ObservableCollection<DiseaseType>(diseases);
+
+            // Initialization PaginationHelper
+            Pagination = new PaginationHelper<DiseaseType>(Diseases, 18);
         }
 
-        // Thực hiện cập nhật dữ liệu dịch bệnh
+        public IAsyncRelayCommand SearchNameCommand { get; }
+        public async Task GetBySearchNameAsync()
+        {
+            if (_diseaseService is null)
+            {
+                return;
+            }
+            var diseases =  await _diseaseService.GetByNameSearch(KeywordName);
+            Diseases = new ObservableCollection<DiseaseType>(diseases);
+            Pagination = new PaginationHelper<DiseaseType>(Diseases, 18);
+       
+        }
+
+        //Update disease data
         public IAsyncRelayCommand UpdateDiseaseCommand { get; }
 
         private async Task UpdateDiseaseAsync()
@@ -206,7 +295,7 @@ namespace disaster_management.ViewModels.ChildViewModels
             await GetAllDiseasesAsync();
         }
 
-        // Thêm dữ liệu dịch bệnh
+        //More epidemic data
         public IAsyncRelayCommand AddDiseaseCommand { get; }
 
         private async Task AddDiseaseAsync()
@@ -218,11 +307,28 @@ namespace disaster_management.ViewModels.ChildViewModels
             }
             var question = MessageBox.Show("Bạn muốn thêm dữ liệu dịch bệnh ?", "Thêm Dữ Liệu", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (question == MessageBoxResult.Cancel) return;
+          
             SetSeverity(DiseaseSeverityIndexAdd);
             SetDiseaseGroup(DiseaseGroupIndexAdd);
-            await _diseaseService.AddAsync(Disease);
+            await _diseaseService.AddAsync(DiseaseAdd.Clone()); // Clone to keep the value from changing
             await GetAllDiseasesAsync();
         }
+
+        //Delete disease data
+        public IAsyncRelayCommand DelDiseaseCommand { get; }
+
+        public async Task DeleteDiseaseAsync()
+        {
+            if (_diseaseService is null)
+            {
+                return;
+            }
+            var question = MessageBox.Show("Bạn muốn xoá dữ liệu dịch bệnh ?", "Xoá Dữ Liệu", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if (question == MessageBoxResult.Cancel) return;
+            await _diseaseService.DeleteAsync((Disease.Clone()).DiseaseId);
+            await GetAllDiseasesAsync();
+        }
+        #endregion CRUD
 
     }
 }
