@@ -2,9 +2,9 @@
     x:Class="disaster_management.Views.Usercontrols.DiseaseManagement"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:disaster_management.Views.Usercontrols"
-    xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="600"
@@ -31,8 +31,10 @@
                 Text="QUẢN LÝ DỊCH BỆNH" />
         </Grid>
 
-        <TabControl Grid.Row="1" MouseDown="TabItem_MouseDown"
-                    Style="{StaticResource MahApps.Styles.TabControl.ColorPicker}">
+        <TabControl
+            Grid.Row="1"
+            MouseDown="TabItem_MouseDown"
+            Style="{StaticResource MahApps.Styles.TabControl.ColorPicker}">
 
             <!--  Quản Lý Dịch Bệnh  -->
             <TabItem Header="Quản Lý Dịch Bệnh">
@@ -634,10 +636,10 @@
 
 
             <!--  Chuẩn Đoán Ổ Dịch  -->
-            <TabItem Header="Chuẩn Đoán Ổ Dịch" >
-               
+            <TabItem Header="Chuẩn Đoán Ổ Dịch">
+
                 <Grid Margin="10,0,0,0">
-                   
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="1.2*" />
@@ -661,14 +663,10 @@
                                 VerticalAlignment="Top"
                                 Orientation="Horizontal">
 
-                                <TextBox
-                                    Width="190"
-                                    Style="{StaticResource MahApps.Styles.TextBox}"
-                                    />
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
                                 <Button
                                     Width="90"
                                     Margin="5,0,0,0"
-                                   
                                     Content="Tìm Kiếm"
                                     FontSize="16"
                                     Style="{StaticResource MahApps.Styles.Button}" />
@@ -695,7 +693,8 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Background="AliceBlue"
-                                    ItemsSource="{Binding Pagination_OD.PagedItems}" />
+                                    ItemsSource="{Binding Pagination_OD.PagedItems}"
+                                    SelectedItem="{Binding SelectedOutbreakDia}" />
                                 <!--  phan trang  -->
                                 <StackPanel
                                     Grid.Row="1"
@@ -817,7 +816,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Kết quả:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding SelectedOutbreakDia.DiagnosisResult}" />
                                             </StackPanel>
                                             <!--  ngay  -->
                                             <StackPanel
