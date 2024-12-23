@@ -394,6 +394,7 @@
                                 <DataGrid ItemsSource="{Binding Pagination_Outbreak.PagedItems}"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
+                                          AutoGenerateColumns="False"
                                     Background="AliceBlue" >
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Id" Binding="{Binding OutbreakId}" />
