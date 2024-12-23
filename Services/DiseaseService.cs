@@ -156,6 +156,10 @@ namespace disaster_management.Services
         {
             await _repositoryOutbreak.UpdateAsync(entity);
         }
+         async Task IOutbreakService.DeleteAsync(int id)
+        {
+            await _repositoryOutbreak.DeleteAsync(id);
+        }
         async Task<IEnumerable<Outbreak>> IOutbreakService.GetByNameSearch(string keyword)
         {
           return await _repositoryOutbreak.GetByNameSearch(keyword);

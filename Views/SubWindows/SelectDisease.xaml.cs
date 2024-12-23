@@ -20,10 +20,15 @@ namespace disaster_management.Views.SubWindows
     /// </summary>
     public partial class SelectDisease : MetroWindow
     {
-        public SelectDisease(ViewModels.ChildViewModels.DiseaseViewModel? diseaseViewModel)
+        public SelectDisease()
         {
             InitializeComponent();
-            DataContext = diseaseViewModel; 
+           
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

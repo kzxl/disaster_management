@@ -404,7 +404,7 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     AutoGenerateColumns="False"
-                                    Background="AliceBlue"
+                                    Background="AliceBlue" SelectedItem="{Binding SelectedOutbreak}"
                                     ItemsSource="{Binding Pagination_Outbreak.PagedItems}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding OutbreakId}" Header="Id" />
@@ -478,7 +478,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Tên ổ dịch:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding Outbreak.OutbreakName}" />
                                             </StackPanel>
                                             <!--  kinh do  -->
                                             <StackPanel
@@ -486,7 +489,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Kinh độ:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding Outbreak.Longitude}" />
                                             </StackPanel>
                                             <!--  vi độ  -->
                                             <StackPanel
@@ -494,7 +500,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Vĩ độ:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox  Text="{Binding Outbreak.Latitude}" Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
                                             </StackPanel>
                                             <!--  nay phát hiện  -->
                                             <StackPanel
@@ -502,7 +508,8 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Ngày phát hiện:</TextBlock>
-                                                <mah:DateTimePicker Width="160" />
+                                                <mah:DateTimePicker DisplayDateStart="2023-01-01"
+                                                    SelectedDateTime="{Binding Outbreak.DetectedDate }" Width="160" />
                                             </StackPanel>
                                             <!--  trang thái  -->
                                             <StackPanel
@@ -511,7 +518,7 @@
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Trạng thái:</TextBlock>
                                                 <ComboBox
-                                                    Width="160"
+                                                    Width="160" SelectedIndex="{Binding SelectedIndexStatusOutBreak}"
                                                     VerticalAlignment="Center"
                                                     Style="{StaticResource MahApps.Styles.ComboBox}">
                                                     <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
@@ -527,17 +534,20 @@
                                                 <TextBlock Width="90" VerticalAlignment="Center">Loại dịch bệnh:</TextBlock>
                                                 <TextBox
                                                     Width="160"
+                                                    IsReadOnly="True"
                                                     Style="{StaticResource MahApps.Styles.TextBox}"
-                                                    Text="{Binding Outbreak.DiseaseId}" />
+                                                    Text="{Binding UserDiseaseId}" />
+
                                                 <Button
                                                     Width="40"
                                                     Margin="2,0,0,0"
-                                                    Click="Button_ChonLoaiDichBenh">
+                                                    Command="{Binding OpenPopupSelectDiseaseCommand}">
                                                     ...
                                                 </Button>
                                             </StackPanel>
 
                                             <Button
+                                                Command="{Binding AddOutbreakCommand}"
                                                 Height="40"
                                                 Margin="0,20,0,0"
                                                 FontSize="18">
@@ -641,7 +651,7 @@
                                                 <TextBlock Width="90" VerticalAlignment="Center">Mã ổ dịch:</TextBlock>
                                                 <mah:NumericUpDown Value="0" />
                                             </StackPanel>
-                                            <Button
+                                            <Button Command="{Binding DeleteOutbreakCommand}"
                                                 Height="40"
                                                 Margin="0,20,0,0"
                                                 FontSize="18">

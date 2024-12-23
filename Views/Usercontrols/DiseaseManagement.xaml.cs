@@ -32,14 +32,14 @@ namespace disaster_management.Views.Usercontrols
 
         private void Button_ChonLoaiDichBenh(object sender, RoutedEventArgs e)
         {
-           SelectDisease selectDisease = new SelectDisease(DataContext as DiseaseViewModel);
-            selectDisease.ShowDialog();
+         //  SelectDisease selectDisease = new SelectDisease(DataContext as DiseaseViewModel);
+          //  selectDisease.ShowDialog();
         }
 
         private void Button_ChonODichBenh(object sender, RoutedEventArgs e)
         {
-            SelectOutbreak selectOutbreak = new SelectOutbreak(DataContext as DiseaseViewModel);
-            selectOutbreak.ShowDialog();
+          //  SelectOutbreak selectOutbreak = new SelectOutbreak(DataContext as DiseaseViewModel);
+          //  selectOutbreak.ShowDialog();
         }
 
         private void TabItem_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

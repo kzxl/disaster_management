@@ -51,7 +51,12 @@ namespace disaster_management.ViewModels.ChildViewModels
 
             // Search
             SearchNameCommand = new AsyncRelayCommand(GetBySearchNameAsync);
-          
+
+            OpenPopupSelectDiseaseCommand = new RelayCommand(OpenPopupSelectDisease);
+            AddOutbreakCommand = new AsyncRelayCommand(AddOutBreakAsync);
+            DeleteOutbreakCommand = new AsyncRelayCommand(DeleteOutbreakAsync);
+
+
         }
         private async void InitializeAsync()
         {
