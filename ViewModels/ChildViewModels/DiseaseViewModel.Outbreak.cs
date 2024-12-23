@@ -40,6 +40,21 @@ namespace disaster_management.ViewModels.ChildViewModels
             set { SetProperty(ref _selectedOutbreak, value); Outbreak = value; }
         }
 
+        private DiseaseType _diseaseItem;
+
+        public DiseaseType DiseaseItem
+        {
+            get { return _diseaseItem; }
+            set { _diseaseItem = value; 
+                OnPropertyChanged();
+                if (value != null)
+                {
+                    Outbreak.DiseaseId = value.DiseaseId;
+                }
+            }
+        }
+
+
         #region CRUD
         public IAsyncRelayCommand LoadOutBreakCommand { get; }
         private async Task GetAllOutBreakAsync()
@@ -54,6 +69,17 @@ namespace disaster_management.ViewModels.ChildViewModels
             // Initialization PaginationHelper
             Pagination_Outbreak = new PaginationHelper<Outbreak>(OutBreakList, 18);
         }
+
+        public IAsyncRelayCommand SelectDiseaseIDCommand { get; }
+        //private async Task SelectDiseaseIDAsync()
+        //{
+        //    if (SelectedOutbreak is null)
+        //    {
+        //        return;
+        //    }
+        //    Outbreak = SelectedOutbreak;
+           
+        //}
         #endregion
 
     }
