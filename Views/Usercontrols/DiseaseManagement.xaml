@@ -827,7 +827,9 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Ngày:</TextBlock>
-                                                <mah:DateTimePicker Width="160" />
+                                                <mah:DateTimePicker 
+                                                    SelectedDateTime="{Binding SelectedOutbreakDia.DiagnosisDate}" 
+                                                    Width="160" />
                                             </StackPanel>
                                             <!--  Bac Si  -->
                                             <StackPanel
@@ -835,7 +837,9 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Bác sĩ:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox Width="160" 
+                                                         Text="{Binding SelectedOutbreakDia.DoctorName}" 
+                                                         Style="{StaticResource MahApps.Styles.TextBox}" />
                                             </StackPanel>
 
 
