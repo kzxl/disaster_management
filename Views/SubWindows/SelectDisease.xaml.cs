@@ -20,9 +20,10 @@ namespace disaster_management.Views.SubWindows
     /// </summary>
     public partial class SelectDisease : MetroWindow
     {
-        public SelectDisease()
+        public SelectDisease(ViewModels.ChildViewModels.DiseaseViewModel? diseaseViewModel)
         {
             InitializeComponent();
+            DataContext = diseaseViewModel; 
         }
     }
 }

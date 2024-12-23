@@ -32,7 +32,7 @@ namespace disaster_management.Views.Usercontrols
 
         private void Button_ChonLoaiDichBenh(object sender, RoutedEventArgs e)
         {
-           SelectDisease selectDisease = new SelectDisease();
+           SelectDisease selectDisease = new SelectDisease(DataContext as DiseaseViewModel);
             selectDisease.ShowDialog();
         }
 
