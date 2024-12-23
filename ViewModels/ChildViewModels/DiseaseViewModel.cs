@@ -35,6 +35,7 @@ namespace disaster_management.ViewModels.ChildViewModels
 
             // Load danh sách chuản đoán
             LoadODCommand = new AsyncRelayCommand(GetAllODAsync);
+            LoadOutBreakCommand = new AsyncRelayCommand(GetAllOutBreakAsync);
 
             InitializeAsync();
 
@@ -55,7 +56,9 @@ namespace disaster_management.ViewModels.ChildViewModels
         private async void InitializeAsync()
         {
             await LoadDiseasesCommand.ExecuteAsync(null);
+            await LoadOutBreakCommand.ExecuteAsync(null);
             await LoadODCommand.ExecuteAsync(null);
+           
         }
 
         #region Prop

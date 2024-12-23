@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using disaster_management.ViewModels.ChildViewModels;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,10 @@ namespace disaster_management.Views.SubWindows
     /// </summary>
     public partial class SelectOutbreak : MetroWindow
     {
-        public SelectOutbreak()
+        public SelectOutbreak(DiseaseViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

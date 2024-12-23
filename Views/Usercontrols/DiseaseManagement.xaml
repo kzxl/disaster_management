@@ -391,7 +391,7 @@
                                     <RowDefinition />
                                     <RowDefinition Height="50" />
                                 </Grid.RowDefinitions>
-                                <DataGrid
+                                <DataGrid ItemsSource="{Binding Pagination_Outbreak.PagedItems}"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Background="AliceBlue" />
@@ -786,7 +786,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    IsReadOnly="True"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}" />
                                                 <Button
                                                     Width="40"
                                                     Margin="2,0,0,0"
@@ -827,9 +830,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Ngày:</TextBlock>
-                                                <mah:DateTimePicker 
-                                                    SelectedDateTime="{Binding SelectedOutbreakDia.DiagnosisDate}" 
-                                                    Width="160" />
+                                                <mah:DateTimePicker Width="160" SelectedDateTime="{Binding SelectedOutbreakDia.DiagnosisDate}" />
                                             </StackPanel>
                                             <!--  Bac Si  -->
                                             <StackPanel
@@ -837,9 +838,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Bác sĩ:</TextBlock>
-                                                <TextBox Width="160" 
-                                                         Text="{Binding SelectedOutbreakDia.DoctorName}" 
-                                                         Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding SelectedOutbreakDia.DoctorName}" />
                                             </StackPanel>
 
 
