@@ -4,60 +4,215 @@ using disaster_management.Repositories;
 
 namespace disaster_management.Services
 {
-    public interface IDiseaseService
+    public interface IDiseaseTypeService
     {
+        // DiseaseType
         Task<IEnumerable<DiseaseType>> GetAllAsync();
         Task<DiseaseType?> GetByIdAsync(int id);
         Task AddAsync(DiseaseType entity);
         Task UpdateAsync(DiseaseType entity);
         Task DeleteAsync(int id);
-        Task<IEnumerable<DiseaseType>> GetBySeverityAsync(string severity);
         Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword);
+        //
+
+
+    }
+    public interface IOutbreakDiagnosisService
+    {
+        Task<IEnumerable<OutbreakDiagnosis>> GetAllAsync();
+        Task<OutbreakDiagnosis?> GetByIdAsync(int id);
+        Task AddAsync(OutbreakDiagnosis entity);
+        Task UpdateAsync(OutbreakDiagnosis entity);
+        Task DeleteAsync(int id);
+        Task<IEnumerable<OutbreakDiagnosis>> GetByResultSearch(string keyword);
     }
 
-    public class DiseaseService : IDiseaseService
+    public interface IOutbreakService
     {
-        private readonly DiseaseRepository _repository;
-        public DiseaseService(DiseaseRepository repository)
+        Task<IEnumerable<Outbreak>> GetAllAsync();
+        Task<Outbreak?> GetByIdAsync(int id);
+        Task AddAsync(Outbreak entity);
+        Task UpdateAsync(Outbreak entity);
+        Task DeleteAsync(int id);
+        Task<IEnumerable<Outbreak>> GetByNameSearch(string keyword);
+    }
+
+    public interface ISymptomService
+    {
+        Task<IEnumerable<Symptom>> GetAllAsync();
+        Task<Symptom?> GetByIdAsync(int id);
+        Task AddAsync(Symptom entity);
+        Task UpdateAsync(Symptom entity);
+        Task DeleteAsync(int id);
+        Task<IEnumerable<Symptom>> GetByNameSearch(string keyword);
+    }
+
+    public interface IVaccinationService
+    {
+        Task<IEnumerable<Vaccination>> GetAllAsync();
+        Task<Vaccination?> GetByIdAsync(int id);
+        Task AddAsync(Vaccination entity);
+        Task UpdateAsync(Vaccination entity);
+        Task DeleteAsync(int id);
+        Task<IEnumerable<Vaccination>> GetByNameSearch(string keyword);
+    }
+
+
+
+
+
+    public class DiseaseService : IDiseaseTypeService, IOutbreakDiagnosisService, IOutbreakService, ISymptomService, IVaccinationService
+    {
+        private readonly DiseaseRepository _repositoryDiseaseType;
+        private readonly OutbreakDiagnosisRepository _repositoryOutbreakDiagnosis;
+        private readonly OutbreakRepository _repositoryOutbreak;
+        private readonly SymptomRepository _repositorySymptom;
+        private readonly VaccinationRepository _repositoryVaccination;
+
+        public DiseaseService(
+            DiseaseRepository repositoryDiseaseType,
+            OutbreakDiagnosisRepository outbreakDiagnosisRepository,
+            OutbreakRepository outbreakRepository,
+            SymptomRepository symptomRepository,
+            VaccinationRepository vaccinationRepository
+
+            )
         {
-            _repository = repository;
+            _repositoryDiseaseType = repositoryDiseaseType;
+            _repositoryOutbreakDiagnosis = outbreakDiagnosisRepository;
+            _repositoryOutbreak = outbreakRepository;
+             _repositorySymptom = symptomRepository;
+            _repositoryVaccination = vaccinationRepository;
+
         }
 
+        #region Kieu dịch bệnh
         public async Task<IEnumerable<DiseaseType>> GetAllAsync()
         {
-            return await _repository.GetAllAsync();
+            return await _repositoryDiseaseType.GetAllAsync();
         }
-
         public async Task<DiseaseType?> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            return await _repositoryDiseaseType.GetByIdAsync(id);
         }
-
         public async Task AddAsync(DiseaseType entity)
         {
-            await _repository.AddAsync(entity);
+            await _repositoryDiseaseType.AddAsync(entity);
         }
-
         public async Task UpdateAsync(DiseaseType entity)
         {
-            await _repository.UpdateAsync(entity);
+            await _repositoryDiseaseType.UpdateAsync(entity);
         }
-
         public async Task DeleteAsync(int id)
         {
-            await _repository.DeleteAsync(id);
+            await _repositoryDiseaseType.DeleteAsync(id);
         }
-
-        public async Task<IEnumerable<DiseaseType>> GetBySeverityAsync(string severity)
-        {
-          return await _repository.GetBySeverityAsync(severity);
-        }
-
         public async Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword)
         {
-            return await _repository.GetByNameSearch(keyword);
+            return await _repositoryDiseaseType.GetByNameSearch(keyword);
+        }
+        #endregion
+
+        #region Chuan doan o dich
+        async Task<IEnumerable<OutbreakDiagnosis>> IOutbreakDiagnosisService.GetAllAsync()
+        {
+            return await _repositoryOutbreakDiagnosis.GetAllAsync();
+        }
+        async Task<OutbreakDiagnosis?> IOutbreakDiagnosisService.GetByIdAsync(int id)
+        {
+            return await _repositoryOutbreakDiagnosis.GetByIdAsync(id);
+        }
+        public async Task AddAsync(OutbreakDiagnosis entity)
+        {
+            await _repositoryOutbreakDiagnosis.AddAsync(entity);
+        }
+        public async Task UpdateAsync(OutbreakDiagnosis entity)
+        {
+            await _repositoryOutbreakDiagnosis.UpdateAsync(entity);
+        }
+        public async Task<IEnumerable<OutbreakDiagnosis>> GetByResultSearch(string keyword)
+        {
+            return await _repositoryOutbreakDiagnosis.GetByResultSearch(keyword);
+        }
+        #endregion
+
+        #region OutBreak
+
+        async Task<IEnumerable<Outbreak>> IOutbreakService.GetAllAsync()
+        {
+            return await _repositoryOutbreak.GetAllAsync();
+        }
+        async Task<Outbreak?> IOutbreakService.GetByIdAsync(int id)
+        {
+            return await _repositoryOutbreak.GetByIdAsync(id);
         }
 
-      
+        public async Task AddAsync(Outbreak entity)
+        {
+            await _repositoryOutbreak.AddAsync(entity);
+        }
+        public async Task UpdateAsync(Outbreak entity)
+        {
+            await _repositoryOutbreak.UpdateAsync(entity);
+        }
+        async Task<IEnumerable<Outbreak>> IOutbreakService.GetByNameSearch(string keyword)
+        {
+          return await _repositoryOutbreak.GetByNameSearch(keyword);
+        }
+        #endregion
+
+        #region Symptom
+
+       
+        async Task<IEnumerable<Symptom>> ISymptomService.GetAllAsync()
+        {
+           return await _repositorySymptom.GetAllAsync();
+        }
+
+        async Task<Symptom?> ISymptomService.GetByIdAsync(int id)
+        {
+            return await _repositorySymptom.GetByIdAsync(id);
+        }
+
+        public async Task AddAsync(Symptom entity)
+        {
+            await _repositorySymptom.AddAsync(entity);
+        }
+
+        public async Task UpdateAsync(Symptom entity)
+        {
+            await _repositorySymptom.UpdateAsync(entity);
+        }
+
+        async Task<IEnumerable<Symptom>> ISymptomService.GetByNameSearch(string keyword)
+        {
+            return await _repositorySymptom.GetByNameSearch(keyword);
+        }
+        #endregion
+
+
+        #region Vaccination
+       
+        async Task<IEnumerable<Vaccination>> IVaccinationService.GetAllAsync()
+        {
+            return await _repositoryVaccination.GetAllAsync();
+        }
+        async Task<Vaccination?> IVaccinationService.GetByIdAsync(int id)
+        {
+            return await _repositoryVaccination.GetByIdAsync(id);
+        }
+        public async Task AddAsync(Vaccination entity)
+        {
+            await _repositoryVaccination.AddAsync(entity);
+        }
+        public async Task UpdateAsync(Vaccination entity)
+        {
+            await _repositoryVaccination.UpdateAsync(entity);
+        }
+        Task<IEnumerable<Vaccination>> IVaccinationService.GetByNameSearch(string keyword)
+        {
+            return _repositoryVaccination.GetByNameSearch(keyword);
+        }
+        #endregion
     }
 }

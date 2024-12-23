@@ -8,13 +8,18 @@ using System.Windows;
 
 namespace disaster_management.ViewModels.ChildViewModels
 {
-    public class DiseaseViewModel : ObservableObject
+    public partial class DiseaseViewModel : ObservableObject
     {
-        private readonly IDiseaseService? _diseaseService;
+        private readonly IDiseaseTypeService? _diseaseService;
+        private readonly IOutbreakDiagnosisService? _outbreakDiagnosisService;
 
-        public DiseaseViewModel(IDiseaseService diseaseService)
+        public DiseaseViewModel(
+            IDiseaseTypeService diseaseService,
+            IOutbreakDiagnosisService? outbreakDiagnosisService)
         {
             _diseaseService = diseaseService;
+            _outbreakDiagnosisService = outbreakDiagnosisService;
+           
 
             LoadDiseasesCommand = new AsyncRelayCommand(GetAllDiseasesAsync); // First load
             LoadDiseasesCommand.ExecuteAsync(null);
@@ -31,7 +36,7 @@ namespace disaster_management.ViewModels.ChildViewModels
 
             // Search
             SearchNameCommand = new AsyncRelayCommand(GetBySearchNameAsync);
-           
+            _outbreakDiagnosisService = outbreakDiagnosisService;
         }
 
         #region Prop

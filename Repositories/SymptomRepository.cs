@@ -9,23 +9,22 @@ using System.Threading.Tasks;
 
 namespace disaster_management.Repositories
 {
-    public class OutbreakDiagnosisRepository : Repository<OutbreakDiagnosis>
+    public class SymptomRepository:Repository<Symptom>
     {
         private readonly DaDManagementContext _context;
-        public OutbreakDiagnosisRepository(DaDManagementContext context) : base(context) 
+        public SymptomRepository(DaDManagementContext context):base(context) 
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<OutbreakDiagnosis>> GetByResultSearch(string keyword)
+        public async Task<IEnumerable<Symptom>> GetByNameSearch(string keyword)
         {
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                return await _context.OutbreakDiagnoses.ToListAsync();
+                return await _context.Symptoms.ToListAsync();
             }
-
-            return await _context.OutbreakDiagnoses
-                .Where(d => EF.Functions.Like(d.DiagnosisResult, $"%{keyword}%"))
+            return await _context.Symptoms
+                .Where(d => EF.Functions.Like(d.SymptomName, $"%{keyword}%"))
                 .ToListAsync();
         }
     }

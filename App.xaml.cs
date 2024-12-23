@@ -44,13 +44,12 @@ namespace disaster_management
 
             // Đăng ký Repository
             services.AddScoped<DiseaseRepository>();
+            services.AddScoped<OutbreakDiagnosisRepository>();
 
 
             // Đăng ký các Service
-            services.AddScoped<IDiseaseService, DiseaseService>();
-
-            // Đăng ký UnitOfWork
-            //  services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IDiseaseTypeService, DiseaseService>();
+            services.AddScoped<IOutbreakDiagnosisService, DiseaseService>();
 
 
             services.AddTransient<DiseaseViewModel>();

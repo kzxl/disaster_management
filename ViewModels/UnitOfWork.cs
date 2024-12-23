@@ -15,7 +15,7 @@ namespace disaster_management.ViewModels
         private readonly DaDManagementContext _context;
         private readonly IServiceProvider _serviceProvider;
 
-        private IDiseaseService? _diseaseService;
+        private IDiseaseTypeService? _diseaseService;
 
         public UnitOfWork(DaDManagementContext context, IServiceProvider serviceProvider)
         {
@@ -23,7 +23,7 @@ namespace disaster_management.ViewModels
             _serviceProvider = serviceProvider;
         }
 
-        public IDiseaseService Diseases => _diseaseService ??= _serviceProvider.GetRequiredService<IDiseaseService>();
+        public IDiseaseTypeService Diseases => _diseaseService ??= _serviceProvider.GetRequiredService<IDiseaseTypeService>();
 
         public async Task<int> SaveChangesAsync()
         {
