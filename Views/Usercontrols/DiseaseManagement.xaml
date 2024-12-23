@@ -394,7 +394,19 @@
                                 <DataGrid ItemsSource="{Binding Pagination_Outbreak.PagedItems}"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Background="AliceBlue" />
+                                    Background="AliceBlue" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id" Binding="{Binding OutbreakId}" />
+                                        <DataGridTextColumn Header="Name" Binding="{Binding OutbreakName}" />
+                                        <DataGridTextColumn Header="Latitude" Binding="{Binding Latitude}" />
+                                        <DataGridTextColumn Header="Longitude" Binding="{Binding Longitude}" />
+                                        <DataGridTextColumn Header="DetectedDate" Binding="{Binding DetectedDate}" />
+                                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+                                        <DataGridTextColumn Header="DiseaseId" Binding="{Binding DiseaseId}" />
+
+                                        <!-- HiddenProperty sẽ không được định nghĩa -->
+                                    </DataGrid.Columns>
+                                </DataGrid>
                                 <!--  phan trang  -->
                                 <StackPanel
                                     Grid.Row="1"
