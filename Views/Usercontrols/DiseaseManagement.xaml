@@ -95,19 +95,19 @@
                                 <DataGrid
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
+                                    AutoGenerateColumns="False"
                                     Background="AliceBlue"
                                     CanUserAddRows="False"
                                     CanUserDeleteRows="False"
-                                    AutoGenerateColumns="False"
                                     IsReadOnly="True"
                                     ItemsSource="{Binding Pagination.PagedItems}"
-                                    SelectedItem="{Binding SelectedDisease}" >
+                                    SelectedItem="{Binding SelectedDisease}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Id" Binding="{Binding DiseaseId}" />
-                                        <DataGridTextColumn Header="Tên" Binding="{Binding DiseaseName}" />
-                                        <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" />
-                                        <DataGridTextColumn Header="Cấp độ" Binding="{Binding Severity}" />
-                                        <DataGridTextColumn Header="Nhóm dịch bệnh" Binding="{Binding DiseaseGroup}" />
+                                        <DataGridTextColumn Binding="{Binding DiseaseId}" Header="Id" />
+                                        <DataGridTextColumn Binding="{Binding DiseaseName}" Header="Tên" />
+                                        <DataGridTextColumn Binding="{Binding Description}" Header="Mô tả" />
+                                        <DataGridTextColumn Binding="{Binding Severity}" Header="Cấp độ" />
+                                        <DataGridTextColumn Binding="{Binding DiseaseGroup}" Header="Nhóm dịch bệnh" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <!--  phan trang  -->
@@ -400,19 +400,20 @@
                                     <RowDefinition />
                                     <RowDefinition Height="50" />
                                 </Grid.RowDefinitions>
-                                <DataGrid ItemsSource="{Binding Pagination_Outbreak.PagedItems}"
+                                <DataGrid
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                          AutoGenerateColumns="False"
-                                    Background="AliceBlue" >
+                                    AutoGenerateColumns="False"
+                                    Background="AliceBlue"
+                                    ItemsSource="{Binding Pagination_Outbreak.PagedItems}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Id" Binding="{Binding OutbreakId}" />
-                                        <DataGridTextColumn Header="Tên" Binding="{Binding OutbreakName}" />
-                                        <DataGridTextColumn Header="Vĩ độ" Binding="{Binding Latitude}" />
-                                        <DataGridTextColumn Header="Kinh độ" Binding="{Binding Longitude}" />
-                                        <DataGridTextColumn Header="Ngày phát hiện" Binding="{Binding DetectedDate}" />
-                                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" />
-                                        <DataGridTextColumn Header="Mã dịch bệnh" Binding="{Binding DiseaseId}" />
+                                        <DataGridTextColumn Binding="{Binding OutbreakId}" Header="Id" />
+                                        <DataGridTextColumn Binding="{Binding OutbreakName}" Header="Tên" />
+                                        <DataGridTextColumn Binding="{Binding Latitude}" Header="Vĩ độ" />
+                                        <DataGridTextColumn Binding="{Binding Longitude}" Header="Kinh độ" />
+                                        <DataGridTextColumn Binding="{Binding DetectedDate}" Header="Ngày phát hiện" />
+                                        <DataGridTextColumn Binding="{Binding Status}" Header="Trạng thái" />
+                                        <DataGridTextColumn Binding="{Binding DiseaseId}" Header="Mã dịch bệnh" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <!--  phan trang  -->
@@ -524,7 +525,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Loại dịch bệnh:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding Outbreak.DiseaseId}" />
                                                 <Button
                                                     Width="40"
                                                     Margin="2,0,0,0"
