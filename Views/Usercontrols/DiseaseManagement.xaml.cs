@@ -38,7 +38,7 @@ namespace disaster_management.Views.Usercontrols
 
         private void Button_ChonODichBenh(object sender, RoutedEventArgs e)
         {
-            SelectOutbreak selectOutbreak = new SelectOutbreak();
+            SelectOutbreak selectOutbreak = new SelectOutbreak(DataContext as DiseaseViewModel);
             selectOutbreak.ShowDialog();
         }
 
