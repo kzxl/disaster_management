@@ -98,9 +98,18 @@
                                     Background="AliceBlue"
                                     CanUserAddRows="False"
                                     CanUserDeleteRows="False"
+                                    AutoGenerateColumns="False"
                                     IsReadOnly="True"
                                     ItemsSource="{Binding Pagination.PagedItems}"
-                                    SelectedItem="{Binding SelectedDisease}" />
+                                    SelectedItem="{Binding SelectedDisease}" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id" Binding="{Binding DiseaseId}" />
+                                        <DataGridTextColumn Header="Tên" Binding="{Binding DiseaseName}" />
+                                        <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" />
+                                        <DataGridTextColumn Header="Cấp độ" Binding="{Binding Severity}" />
+                                        <DataGridTextColumn Header="Nhóm dịch bệnh" Binding="{Binding DiseaseGroup}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
                                 <!--  phan trang  -->
                                 <StackPanel
                                     Grid.Row="1"
@@ -398,14 +407,12 @@
                                     Background="AliceBlue" >
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Id" Binding="{Binding OutbreakId}" />
-                                        <DataGridTextColumn Header="Name" Binding="{Binding OutbreakName}" />
-                                        <DataGridTextColumn Header="Latitude" Binding="{Binding Latitude}" />
-                                        <DataGridTextColumn Header="Longitude" Binding="{Binding Longitude}" />
-                                        <DataGridTextColumn Header="DetectedDate" Binding="{Binding DetectedDate}" />
-                                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
-                                        <DataGridTextColumn Header="DiseaseId" Binding="{Binding DiseaseId}" />
-
-                                        <!-- HiddenProperty sẽ không được định nghĩa -->
+                                        <DataGridTextColumn Header="Tên" Binding="{Binding OutbreakName}" />
+                                        <DataGridTextColumn Header="Vĩ độ" Binding="{Binding Latitude}" />
+                                        <DataGridTextColumn Header="Kinh độ" Binding="{Binding Longitude}" />
+                                        <DataGridTextColumn Header="Ngày phát hiện" Binding="{Binding DetectedDate}" />
+                                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" />
+                                        <DataGridTextColumn Header="Mã dịch bệnh" Binding="{Binding DiseaseId}" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <!--  phan trang  -->
