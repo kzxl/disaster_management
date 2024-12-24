@@ -135,6 +135,10 @@ namespace disaster_management.Services
         {
             return await _repositoryOutbreakDiagnosis.GetByResultSearch(keyword);
         }
+         async Task IOutbreakDiagnosisService.DeleteAsync(int id)
+        {
+            await _repositoryOutbreakDiagnosis.DeleteAsync(id);
+        }
         #endregion
 
         #region OutBreak

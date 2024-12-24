@@ -2,22 +2,18 @@
 using disaster_management.Models;
 using disaster_management.ViewModels.Utils;
 using disaster_management.Views.SubWindows;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace disaster_management.ViewModels.ChildViewModels
 {
     public partial class DiseaseViewModel
     {
+        #region Properties
+       
         private PaginationHelper<Outbreak> _Pagination_Outbreak;
         public PaginationHelper<Outbreak> Pagination_Outbreak
         {
-            get => _Pagination_Outbreak; 
+            get => _Pagination_Outbreak;
             set => SetProperty(ref _Pagination_Outbreak, value);
         }
 
@@ -28,6 +24,7 @@ namespace disaster_management.ViewModels.ChildViewModels
             set => SetProperty(ref _outBreakList, value);
         }
 
+        // Add
         private Outbreak _outbreak = new();
         public Outbreak Outbreak
         {
@@ -35,44 +32,80 @@ namespace disaster_management.ViewModels.ChildViewModels
             set => SetProperty(ref _outbreak, value);
         }
 
+        // Update
+        private Outbreak _outbreakUpdate = new();
+        public Outbreak OutbreakUpdate
+        {
+            get => _outbreakUpdate;
+            set => SetProperty(ref _outbreakUpdate, value);
+        }
+
         private Outbreak _selectedOutbreak;
         public Outbreak SelectedOutbreak
         {
             get => _selectedOutbreak;
-            set { 
-                SetProperty(ref _selectedOutbreak, value); 
-               // if(value !=null)
-                   // Outbreak = value.Clone();
+            set
+            {
+                SetProperty(ref _selectedOutbreak, value);
+                if (value != null)
+                {
+                    OutbreakUpdate = value.Clone();
+                    UserDiseaseIdUpdate = (int)OutbreakUpdate.DiseaseId;
+                    ChangeStatusUpdate();
+                }
+                    
             }
         }
 
         private DiseaseType _diseaseItem;
-
         public DiseaseType DiseaseItem
         {
             get { return _diseaseItem; }
-            set { _diseaseItem = value; 
+            set
+            {
+                _diseaseItem = value;
                 OnPropertyChanged();
                 if (value != null)
                 {
                     UserDiseaseId = value.DiseaseId;
                     Outbreak.DiseaseId = value.DiseaseId;
-                    
+
                 }
             }
         }
 
-        private int _UserDiseaseId;
+        private int _SelectedIndexOutbreakUpdate;
+        public int SelectedIndexOutbreakUpdate
+        {
+            get { return _SelectedIndexOutbreakUpdate; }
+            set { _SelectedIndexOutbreakUpdate = value; OnPropertyChanged(); }
+        }
 
+        private int _UserDiseaseId;
         public int UserDiseaseId
         {
             get { return _UserDiseaseId; }
-            set { _UserDiseaseId = value; OnPropertyChanged(); }
+            set
+            {
+                if (_UserDiseaseId != value)
+                {
+                    _UserDiseaseId = value; 
+                    OnPropertyChanged();
+                    OutbreakUpdate.DiseaseId = value;
+                    UserDiseaseIdUpdate = value;
+                }
+            }
         }
 
+        // ID for update
+        private int _UserDiseaseIdUpdate;
+        public int UserDiseaseIdUpdate
+        {
+            get { return _UserDiseaseIdUpdate; }
+            set { _UserDiseaseIdUpdate = value; OnPropertyChanged(); }
+        }
 
         private int _SelectedIndexStatusOutBreak;
-
         public int SelectedIndexStatusOutBreak
         {
             get { return _SelectedIndexStatusOutBreak; }
@@ -82,12 +115,31 @@ namespace disaster_management.ViewModels.ChildViewModels
                 {
                     _SelectedIndexStatusOutBreak = value;
                     OnPropertyChanged();
-                 
+
                 }
-               
+
             }
         }
 
+        private string _KeywordOutbreakName;
+        public string KeywordOutbreakName
+        {
+            get { return _KeywordOutbreakName; }
+            set { _KeywordOutbreakName = value; OnPropertyChanged(); }
+        }
+
+        #endregion Properties
+
+        #region Pagination
+        public IRelayCommand MoveFirstCommand_Outbreak { get; }
+        public IRelayCommand MovePreviousCommand_Outbreak { get; }
+        public IRelayCommand MoveNextCommand_Outbreak { get; }
+        public IRelayCommand MoveLastCommand_Outbreak { get; }
+        public void MoveFirst_Outbreak() => Pagination_Outbreak.MoveFirst();
+        public void MovePrevious_Outbreak() => Pagination_Outbreak.MovePrevious();
+        public void MoveNext_Outbreak() => Pagination_Outbreak.MoveNext();
+        public void MoveLast_Outbreak() => Pagination_Outbreak.MoveLast();
+        #endregion Pagination
 
         #region CRUD
         public IAsyncRelayCommand LoadOutBreakCommand { get; }
@@ -99,11 +151,9 @@ namespace disaster_management.ViewModels.ChildViewModels
             }
             var outbreak = await _outbreakService.GetAllAsync();
             OutBreakList = new ObservableCollection<Outbreak>(outbreak);
-
-            // Initialization PaginationHelper
             Pagination_Outbreak = new PaginationHelper<Outbreak>(OutBreakList, 18);
         }
-
+        // ADD
         public IAsyncRelayCommand AddOutbreakCommand { get; }
         private async Task AddOutBreakAsync()
         {
@@ -123,43 +173,75 @@ namespace disaster_management.ViewModels.ChildViewModels
             await GetAllOutBreakAsync(); // Reload
         }
 
-
+        // DELETE
         public IAsyncRelayCommand DeleteOutbreakCommand { get; }
         private async Task DeleteOutbreakAsync()
         {
+            if (_outbreakService == null) return;
             await _outbreakService.DeleteAsync(SelectedOutbreak.OutbreakId);
             await GetAllOutBreakAsync(); // Reload
         }
-        public IAsyncRelayCommand UpdateOutbreakCommand { get; }
 
-        private async Task UpdateOutbreakAsync()
+        private void ChangeStatusUpdate()
         {
-            await _outbreakService.UpdateAsync()
+            if (OutbreakUpdate.Status.Equals("Mới phát hiện"))
+            {
+                SelectedIndexOutbreakUpdate = 0;
+            }
+            else if (OutbreakUpdate.Status.Equals("Đang xử lý"))
+            {
+                SelectedIndexOutbreakUpdate = 1;
+            }
+            else if (OutbreakUpdate.Status.Equals("Đã xử lý"))
+            {
+                SelectedIndexOutbreakUpdate = 2;
+            }
         }
 
-        public IAsyncRelayCommand SelectDiseaseIDCommand { get; }
-        //private async Task SelectDiseaseIDAsync()
-        //{
-        //    if (SelectedOutbreak is null)
-        //    {
-        //        return;
-        //    }
-        //    Outbreak = SelectedOutbreak;
+        // UPDATE
+        public IAsyncRelayCommand UpdateOutbreakCommand { get; }
+        private async Task UpdateOutbreakAsync()
+        {
+            if (_outbreakService == null) return;
 
-        //}
-        #endregion
+            if (SelectedIndexOutbreakUpdate == 0)
+            {
+                OutbreakUpdate.Status = "Mới phát hiện";
+            }
+            else if (SelectedIndexOutbreakUpdate == 1)
+            {
+                OutbreakUpdate.Status = "Đang xử lý";
+            }
+            else if (SelectedIndexOutbreakUpdate == 2)
+            {
+                OutbreakUpdate.Status = "Đã xử lý";
+            }
+            await _outbreakService.UpdateAsync(OutbreakUpdate);
+            await GetAllOutBreakAsync(); // Reload
+        }
+
+      
+        // SEARCH
+        public IAsyncRelayCommand SearchOutbreakCommand { get; }
+
+        private async Task SearchNameOutbreakAsync()
+        {
+            if (_outbreakService == null) return;
+            var data =  await _outbreakService.GetByNameSearch(KeywordOutbreakName);
+            OutBreakList = new ObservableCollection<Outbreak>(data);
+            Pagination_Outbreak = new PaginationHelper<Outbreak>(OutBreakList,18);
+        }
+
+        #endregion CRUD
 
         public IRelayCommand OpenPopupSelectDiseaseCommand { get; }
-
         private void OpenPopupSelectDisease()
         {
             var popupWindow = new SelectDisease
             {
                 DataContext = this // Sử dụng chung ViewModel
             };
-
             popupWindow.ShowDialog();
         }
-
     }
 }

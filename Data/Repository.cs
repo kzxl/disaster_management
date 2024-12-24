@@ -99,7 +99,8 @@ namespace disaster_management.Data
         private readonly Dictionary<Type, string> _primaryKeyFields = new()
 {
     { typeof(DiseaseType), "DiseaseId" },
-  //  { //typeof(OtherEntity), "OtherId" }
+     { typeof(Outbreak), "OutbreakId" },
+      { typeof(OutbreakDiagnosis), "DiagnosisId" }
 };
         public async Task UpdateAsync(T entity)
         {
