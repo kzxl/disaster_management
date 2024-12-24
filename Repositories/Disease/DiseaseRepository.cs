@@ -13,11 +13,12 @@ namespace disaster_management.Repositories.Disease
     public class DiseaseRepository : Repository<DiseaseType>
     {
         private readonly DaDManagementContext _context;
-        public DiseaseRepository(DaDManagementContext context) : base(context)
+        public DiseaseRepository(DbContextOptions<DaDManagementContext> context) : base(context)
         {
-            _context = context;
+            _context = new DaDManagementContext(context);
         }
 
+      
         public async Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword)
         {
             if (string.IsNullOrWhiteSpace(keyword))

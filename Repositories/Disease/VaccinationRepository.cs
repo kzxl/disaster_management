@@ -12,9 +12,9 @@ namespace disaster_management.Repositories.Disease
     public class VaccinationRepository : Repository<Vaccination>
     {
         private readonly DaDManagementContext _context;
-        public VaccinationRepository(DaDManagementContext context) : base(context)
+        public VaccinationRepository(DbContextOptions<DaDManagementContext> context) : base(context)
         {
-            _context = context;
+            _context = new DaDManagementContext(context);
         }
 
         public async Task<IEnumerable<Vaccination>> GetByNameSearch(string keyword)

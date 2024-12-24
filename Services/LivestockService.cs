@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace disaster_management.Services
 {
-    public interface ICerfiticateService
+    public interface ICertificateService
     {
         Task<IEnumerable<Certificate>> GetAllAsync();
         Task<Certificate?> GetByIdAsync(int id);
@@ -56,7 +56,7 @@ namespace disaster_management.Services
         Task<IEnumerable<SafeLivestockZone>> GetByNameSearch(string keyword);
     }
 
-    public interface ISlaughterhouseRepositoryService
+    public interface ISlaughterhouseService
     {
         Task<IEnumerable<Slaughterhouse>> GetAllAsync();
         Task<Slaughterhouse?> GetByIdAsync(int id);
@@ -94,12 +94,13 @@ namespace disaster_management.Services
         Task<IEnumerable<VetMedicineAgency>> GetByNameSearch(string keyword);
     }
 
-    public class LivestockService : ICerfiticateService, 
+    public class LivestockService : 
+        ICertificateService, 
         ILivestockFarmService, 
         ILivestockFarmConditionService, 
         ILivestockStatisticService, 
         ISafeLivestockZoneService, 
-        ISlaughterhouseRepositoryService,
+        ISlaughterhouseService,
         ITemporaryZoneService,
         IVeterinaryBranchService,
         IVetMedicineAgencyService
@@ -138,7 +139,7 @@ namespace disaster_management.Services
 
         }
 
-        async Task ICerfiticateService.AddAsync(Certificate entity)
+        async Task ICertificateService.AddAsync(Certificate entity)
         {
             await certificateRepository.AddAsync(entity);
         }
@@ -163,7 +164,7 @@ namespace disaster_management.Services
             await safeLivestockZoneRepository.AddAsync(entity);
         }
 
-        async Task ISlaughterhouseRepositoryService.AddAsync(Slaughterhouse entity)
+        async Task ISlaughterhouseService.AddAsync(Slaughterhouse entity)
         {
             await slaughterhouseRepository.AddAsync(entity);
         }
@@ -183,7 +184,7 @@ namespace disaster_management.Services
             await vetMedicineAgencyRepository.AddAsync(entity);
         }
 
-        async Task ICerfiticateService.DeleteAsync(int id)
+        async Task ICertificateService.DeleteAsync(int id)
         {
             await certificateRepository.DeleteAsync(id);
         }
@@ -208,7 +209,7 @@ namespace disaster_management.Services
             await safeLivestockZoneRepository.DeleteAsync(id);
         }
 
-        async Task ISlaughterhouseRepositoryService.DeleteAsync(int id)
+        async Task ISlaughterhouseService.DeleteAsync(int id)
         {
             await slaughterhouseRepository.DeleteAsync(id);
         }
@@ -230,7 +231,7 @@ namespace disaster_management.Services
 
         }
 
-        async Task<IEnumerable<Certificate>> ICerfiticateService.GetAllAsync()
+        async Task<IEnumerable<Certificate>> ICertificateService.GetAllAsync()
         {
             return await certificateRepository.GetAllAsync();
         }
@@ -255,7 +256,7 @@ namespace disaster_management.Services
             return await safeLivestockZoneRepository.GetAllAsync();
         }
 
-        async Task<IEnumerable<Slaughterhouse>> ISlaughterhouseRepositoryService.GetAllAsync()
+        async Task<IEnumerable<Slaughterhouse>> ISlaughterhouseService.GetAllAsync()
         {
             return await    slaughterhouseRepository.GetAllAsync();
         }
@@ -275,7 +276,7 @@ namespace disaster_management.Services
            return await vetMedicineAgencyRepository.GetAllAsync();
         }
 
-        async Task<Certificate?> ICerfiticateService.GetByIdAsync(int id)
+        async Task<Certificate?> ICertificateService.GetByIdAsync(int id)
         {
            return await certificateRepository.GetByIdAsync(id);
         }
@@ -300,7 +301,7 @@ namespace disaster_management.Services
             return await safeLivestockZoneRepository.GetByIdAsync(id);
         }
 
-        async Task<Slaughterhouse?> ISlaughterhouseRepositoryService.GetByIdAsync(int id)
+        async Task<Slaughterhouse?> ISlaughterhouseService.GetByIdAsync(int id)
         {
             return await slaughterhouseRepository.GetByIdAsync(id);
         }
@@ -320,7 +321,7 @@ namespace disaster_management.Services
             return await vetMedicineAgencyRepository.GetByIdAsync(id);
         }
 
-        async Task<IEnumerable<Certificate>> ICerfiticateService.GetByNameSearch(string keyword)
+        async Task<IEnumerable<Certificate>> ICertificateService.GetByNameSearch(string keyword)
         {
             return await certificateRepository.GetByNameSearch(keyword);
         }
@@ -345,7 +346,7 @@ namespace disaster_management.Services
            return await safeLivestockZoneRepository.GetByNameSearch(keyword);
         }
 
-        async Task<IEnumerable<Slaughterhouse>> ISlaughterhouseRepositoryService.GetByNameSearch(string keyword)
+        async Task<IEnumerable<Slaughterhouse>> ISlaughterhouseService.GetByNameSearch(string keyword)
         {
             return await slaughterhouseRepository.GetByNameSearch(keyword);
         }
@@ -365,7 +366,7 @@ namespace disaster_management.Services
             return await vetMedicineAgencyRepository.GetByNameSearch(keyword);
         }
 
-        async Task ICerfiticateService.UpdateAsync(Certificate entity)
+        async Task ICertificateService.UpdateAsync(Certificate entity)
         {
              await certificateRepository.UpdateAsync(entity);
         }
@@ -390,7 +391,7 @@ namespace disaster_management.Services
            await safeLivestockZoneRepository.UpdateAsync(entity);
         }
 
-        async Task ISlaughterhouseRepositoryService.UpdateAsync(Slaughterhouse entity)
+        async Task ISlaughterhouseService.UpdateAsync(Slaughterhouse entity)
         {
             await slaughterhouseRepository.UpdateAsync(entity);
         }

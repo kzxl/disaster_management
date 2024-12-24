@@ -14,21 +14,10 @@ namespace disaster_management.Views.Usercontrols
         public DiseaseManagement()
         {
             InitializeComponent();
-           // Loaded += DiseaseManagement_Loaded;
+          
         }
 
-        private void DiseaseManagement_Loaded(object sender, RoutedEventArgs e)
-        {
-            // Lấy ViewModel từ DataContext
-            if (DataContext is DiseaseViewModel viewModel)
-            {
-                // Gọi Command từ ViewModel
-                if (viewModel.LoadODCommand.CanExecute(null))
-                {
-                    viewModel.LoadODCommand.Execute(null);
-                }
-            }
-        }
+  
 
         private void Button_ChonLoaiDichBenh(object sender, RoutedEventArgs e)
         {

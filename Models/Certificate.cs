@@ -7,10 +7,14 @@ namespace disaster_management.Models
     {
         public int CertificateId { get; set; }
         public int? FarmId { get; set; }
-        public DateTime? IssueDate { get; set; }
-        public DateTime? ExpiryDate { get; set; }
+        public DateTime? IssueDate { get; set; } = DateTime.Now;
+        public DateTime? ExpiryDate { get; set; }  = DateTime.Now;
         public string? CertificateName { get; set; }
-
         public virtual LivestockFarm? Farm { get; set; }
+
+        public Certificate Clone()
+        {
+            return (Certificate)this.MemberwiseClone();
+        }
     }
 }

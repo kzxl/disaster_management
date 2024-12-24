@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace disaster_management.ViewModels.ChildViewModels
 {
-    public partial class DiseaseViewModel : ObservableObject
+    public partial class DiseaseViewModel 
     {
 
         #region Properties

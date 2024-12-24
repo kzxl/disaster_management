@@ -52,23 +52,9 @@ namespace disaster_management.ViewModels.ChildViewModels
         }
 
 
-        //private int _OutbreakIDVaccineUpdate;
-
-        //public int OutbreakIDVaccineUpdate
-        //{
-        //    get { return _OutbreakIDVaccineUpdate; }
-        //    set
-        //    {
-        //        if (_OutbreakIDVaccineUpdate != value)
-        //        {
-        //            _OutbreakIDVaccineUpdate = value;
-        //            OnPropertyChanged();
-        //        }
-        //    }
-        //}
-
         private Vaccination _vaccinationUpdate = new();
         public Vaccination VaccinationUpdate
+
         {
             get { return _vaccinationUpdate; }
             set
@@ -114,7 +100,6 @@ namespace disaster_management.ViewModels.ChildViewModels
 
 
         #endregion
-
 
         #region CRUD
 

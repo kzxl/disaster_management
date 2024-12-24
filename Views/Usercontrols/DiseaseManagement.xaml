@@ -1062,14 +1062,14 @@
                                     Background="AliceBlue"
                                     IsReadOnly="True"
                                     ItemsSource="{Binding VaccinationList}"
-                                    SelectedItem="{Binding SelectedVaccination}" >
+                                    SelectedItem="{Binding SelectedVaccination}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Mã vaccine" Binding="{Binding VaccinationId}"/>
-                                        <DataGridTextColumn Header="Ngày tiêm" Binding="{Binding VaccinationDate}"/>
-                                        <DataGridTextColumn Header="Tên vacxin" Binding="{Binding VaccineName}"/>
-                                        <DataGridTextColumn Header="Mã ổ dịch" Binding="{Binding OutbreakId}"/>
+                                        <DataGridTextColumn Binding="{Binding VaccinationId}" Header="Mã vaccine" />
+                                        <DataGridTextColumn Binding="{Binding VaccinationDate}" Header="Ngày tiêm" />
+                                        <DataGridTextColumn Binding="{Binding VaccineName}" Header="Tên vacxin" />
+                                        <DataGridTextColumn Binding="{Binding OutbreakId}" Header="Mã ổ dịch" />
                                     </DataGrid.Columns>
-                                    
+
                                 </DataGrid>
                                 <!--  phan trang  -->
                                 <StackPanel

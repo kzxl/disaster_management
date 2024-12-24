@@ -12,9 +12,9 @@ namespace disaster_management.Repositories.Disease
     public class SymptomRepository : Repository<Symptom>
     {
         private readonly DaDManagementContext _context;
-        public SymptomRepository(DaDManagementContext context) : base(context)
+        public SymptomRepository(DbContextOptions<DaDManagementContext> context) : base(context)
         {
-            _context = context;
+            _context = new DaDManagementContext(context);
         }
 
         public async Task<IEnumerable<Symptom>> GetByNameSearch(string keyword)

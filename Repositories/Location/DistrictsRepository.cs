@@ -1,5 +1,6 @@
 ﻿using disaster_management.Data;
 using disaster_management.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace disaster_management.Repositories.Location
 {
     public class DistrictsRepository : Repository<District>
     {
-        public DistrictsRepository(DaDManagementContext context) : base(context)
+        public DistrictsRepository(DbContextOptions<DaDManagementContext> context) : base(context)
         {
         }
 

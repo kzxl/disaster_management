@@ -1,5 +1,6 @@
 ﻿using disaster_management.Data;
 using disaster_management.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace disaster_management.Repositories.Livestock
 {
     public class LivestockFarmRepository : Repository<LivestockFarm>
     {
-        public LivestockFarmRepository(DaDManagementContext context) : base(context)
+        public LivestockFarmRepository(DbContextOptions<DaDManagementContext> context) : base(context)
         {
 
         }
