@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace disaster_management.Models
 {
+    //Vet Medicine Agency
     public partial class VetMedicineAgency
     {
         public int AgencyId { get; set; }
