@@ -1,22 +1,19 @@
 ﻿using disaster_management.DTOs;
 using disaster_management.Models;
-using disaster_management.Repositories;
+using disaster_management.Repositories.Disease;
 
 namespace disaster_management.Services
 {
     public interface IDiseaseTypeService
     {
-        // DiseaseType
         Task<IEnumerable<DiseaseType>> GetAllAsync();
         Task<DiseaseType?> GetByIdAsync(int id);
         Task AddAsync(DiseaseType entity);
         Task UpdateAsync(DiseaseType entity);
         Task DeleteAsync(int id);
         Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword);
-        //
-
-
     }
+
     public interface IOutbreakDiagnosisService
     {
         Task<IEnumerable<OutbreakDiagnosis>> GetAllAsync();

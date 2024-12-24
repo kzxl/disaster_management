@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 using disaster_management.Models;
-using disaster_management.Repositories;
+using disaster_management.Repositories.Disease;
 using disaster_management.Services;
 using disaster_management.ViewModels;
 using disaster_management.ViewModels.ChildViewModels;

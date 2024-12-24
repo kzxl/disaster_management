@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace disaster_management.Repositories
+namespace disaster_management.Repositories.Disease
 {
     public class OutbreakRepository : Repository<Outbreak>
     {
         private readonly DaDManagementContext _context;
-        public OutbreakRepository(DaDManagementContext context):base(context)
+        public OutbreakRepository(DaDManagementContext context) : base(context)
         {
             _context = context;
         }

@@ -7,26 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace disaster_management.Repositories
+namespace disaster_management.Repositories.Disease
 {
-
-    public class DiseaseRepository : Repository<DiseaseType>
+    public class SymptomRepository : Repository<Symptom>
     {
         private readonly DaDManagementContext _context;
-        public DiseaseRepository(DaDManagementContext context) : base(context)
+        public SymptomRepository(DaDManagementContext context) : base(context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword)
+        public async Task<IEnumerable<Symptom>> GetByNameSearch(string keyword)
         {
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                return await _context.DiseaseTypes.ToListAsync();
+                return await _context.Symptoms.ToListAsync();
             }
-
-            return await _context.DiseaseTypes
-                .Where(d => EF.Functions.Like(d.DiseaseName, $"%{keyword}%"))
+            return await _context.Symptoms
+                .Where(d => EF.Functions.Like(d.SymptomName, $"%{keyword}%"))
                 .ToListAsync();
         }
     }
