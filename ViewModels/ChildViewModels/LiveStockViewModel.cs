@@ -10,7 +10,7 @@ namespace disaster_management.ViewModels.ChildViewModels
     /// <summary>
     /// LIVESTOCK FARM
     /// </summary>
-    public class LiveStockViewModel : ObservableObject
+    public partial class LiveStockViewModel : ObservableObject
     {
     }
 }

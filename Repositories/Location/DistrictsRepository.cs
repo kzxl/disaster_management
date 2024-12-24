@@ -1,4 +1,6 @@
-﻿using System;
+﻿using disaster_management.Data;
+using disaster_management.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,15 @@ using System.Threading.Tasks;
 
 namespace disaster_management.Repositories.Location
 {
-    internal class DistrictsRepository
+    public class DistrictsRepository : Repository<District>
     {
+        public DistrictsRepository(DaDManagementContext context) : base(context)
+        {
+        }
+
+        internal async Task<IEnumerable<District>> GetByNameSearch(string keyword)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

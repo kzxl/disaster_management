@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace disaster_management.ViewModels.ChildViewModels
 {
-    public class LiveStockViewModel
+    public partial class LiveStockViewModel
     {
     }
 }
