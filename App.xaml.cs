@@ -42,24 +42,26 @@ namespace disaster_management
             services.AddDbContext<DaDManagementContext>(options =>
                 options.UseSqlServer("Server=NGUYENMINHCHAUM\\SQLEXPRESS;Database=DaDManagement;User Id=sa;Password=Admin@1234;"));
 
-            // Đăng ký Repository
+            // Register Repository
             services.AddScoped<DiseaseRepository>();
+            services.AddScoped<OutbreakDiagnosisRepository>();
+            services.AddScoped<OutbreakRepository>();
+            services.AddScoped<SymptomRepository>();
+            services.AddScoped<VaccinationRepository>();
 
 
-            // Đăng ký các Service
-            services.AddScoped<IDiseaseService, DiseaseService>();
-
-            // Đăng ký UnitOfWork
-            //  services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // Register for Services
+            services.AddScoped<IDiseaseTypeService, DiseaseService>();
+            services.AddScoped<IOutbreakDiagnosisService, DiseaseService>();
+            services.AddScoped<IOutbreakService, DiseaseService>();
+            services.AddScoped<ISymptomService, DiseaseService>();
+            services.AddScoped<IVaccinationService, DiseaseService>();
 
 
             services.AddTransient<DiseaseViewModel>();
-    
-
             services.AddTransient<MainWindow>();
             services.AddTransient<MainViewModel>();
     
-
             return services.BuildServiceProvider();
         }
 

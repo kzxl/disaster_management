@@ -16,9 +16,13 @@ namespace disaster_management.Models
         public string OutbreakName { get; set; } = null!;
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public DateTime DetectedDate { get; set; }
+        public DateTime DetectedDate { get; set; } = DateTime.Now;
         public string Status { get; set; } = null!;
         public int? DiseaseId { get; set; }
+        public Outbreak Clone()
+        {
+            return (Outbreak)this.MemberwiseClone();
+        }
 
         public virtual DiseaseType? Disease { get; set; }
         public virtual ICollection<OutbreakDiagnosis> OutbreakDiagnoses { get; set; }

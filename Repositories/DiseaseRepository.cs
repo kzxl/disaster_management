@@ -18,21 +18,13 @@ namespace disaster_management.Repositories
             _context = context;
         }
 
-        // Get the list by severity
-        public async Task<IEnumerable<DiseaseType>> GetBySeverityAsync(string severity)
-        {
-            return await _context.DiseaseTypes.Where(d => d.Severity == severity).ToListAsync();
-        }
-
         public async Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword)
         {
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                // Trả về toàn bộ dữ liệu nếu không có từ khóa tìm kiếm
                 return await _context.DiseaseTypes.ToListAsync();
             }
 
-            // Tìm kiếm dựa trên từ khóa
             return await _context.DiseaseTypes
                 .Where(d => EF.Functions.Like(d.DiseaseName, $"%{keyword}%"))
                 .ToListAsync();

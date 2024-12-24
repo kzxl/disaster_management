@@ -23,6 +23,12 @@ namespace disaster_management.Views.SubWindows
         public SelectDisease()
         {
             InitializeComponent();
+           
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

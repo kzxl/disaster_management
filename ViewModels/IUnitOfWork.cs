@@ -9,7 +9,7 @@ namespace disaster_management.ViewModels
 {
     public interface IUnitOfWork
     {
-        IDiseaseService Diseases { get; }
+        IDiseaseTypeService Diseases { get; }
         Task<int> SaveChangesAsync();
     }
 }

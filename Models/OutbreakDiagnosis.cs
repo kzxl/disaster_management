@@ -12,5 +12,9 @@ namespace disaster_management.Models
         public int? OutbreakId { get; set; }
 
         public virtual Outbreak? Outbreak { get; set; }
+        public OutbreakDiagnosis Clone()
+        {
+            return (OutbreakDiagnosis)this.MemberwiseClone();
+        }
     }
 }
