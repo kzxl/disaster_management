@@ -60,6 +60,20 @@ namespace disaster_management.ViewModels.ChildViewModels
             DeleteOutbreakDiaCommand = new AsyncRelayCommand(DeleteOutbreakDiaAsync);
             SearchOutbreakDiaCommand = new AsyncRelayCommand(SearchNameOutbreakDiaAsync);
 
+            //Symptom
+            LoadSymptomCommand = new AsyncRelayCommand(GetAllSymptomAsync);
+            AddSymptomCommand = new AsyncRelayCommand(AddSymptomAsync);
+            UpdateSymptomCommand = new AsyncRelayCommand(UpdateSymptomAsync);
+            DeleteSymptomCommand = new AsyncRelayCommand(DeleteSymptomAsync);
+            SearchSymptomCommand = new AsyncRelayCommand(SearchNameSymptomAsync);
+
+            //Vaccination
+            LoadVaccinationCommand = new AsyncRelayCommand(GetAllVaccinationAsync);
+            AddVaccinationCommand = new AsyncRelayCommand(AddVaccinationAsync);
+            UpdateVaccinationCommand = new AsyncRelayCommand(UpdateVaccinationAsync);
+            DeleteVaccinationCommand = new AsyncRelayCommand(DeleteVaccinationAsync);
+            SearchVaccinationCommand = new AsyncRelayCommand(SearchNameVaccinationAsync);
+
 
             InitializeAsync();
         }
@@ -69,6 +83,8 @@ namespace disaster_management.ViewModels.ChildViewModels
             await LoadDiseasesCommand.ExecuteAsync(null);
             await LoadOutBreakCommand.ExecuteAsync(null);
             await LoadODCommand.ExecuteAsync(null);
+            await LoadSymptomCommand.ExecuteAsync(null);
+            await LoadVaccinationCommand.ExecuteAsync(null);
         }
 
         #region Prop

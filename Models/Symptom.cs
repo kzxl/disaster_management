@@ -14,6 +14,12 @@ namespace disaster_management.Models
         public string SymptomName { get; set; } = null!;
         public string? Description { get; set; }
 
+
+        public Symptom Clone()
+        {
+            return (Symptom)this.MemberwiseClone();
+        }
+
         public virtual ICollection<Outbreak> Outbreaks { get; set; }
     }
 }

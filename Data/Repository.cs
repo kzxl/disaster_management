@@ -94,17 +94,19 @@ namespace disaster_management.Data
             await _context.SaveChangesAsync();
         }
 
-        // khai báo danh các khoá chính ở mỗi bảng
-
+        //Declare the primary keys in each table
         private readonly Dictionary<Type, string> _primaryKeyFields = new()
-{
-    { typeof(DiseaseType), "DiseaseId" },
-     { typeof(Outbreak), "OutbreakId" },
-      { typeof(OutbreakDiagnosis), "DiagnosisId" }
-};
+        {
+            { typeof(DiseaseType), "DiseaseId" },
+            { typeof(Outbreak), "OutbreakId" },
+            { typeof(OutbreakDiagnosis), "DiagnosisId" },
+            { typeof(Symptom), "SymptomId" },
+            { typeof(Vaccination), "VaccinationId" },
+        };
+
         public async Task UpdateAsync(T entity)
         {
-           
+
             // Kiểm tra thực thể đã được theo dõi
             var entityType = typeof(T);
 

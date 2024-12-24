@@ -83,6 +83,7 @@ namespace disaster_management.ViewModels.ChildViewModels
                     UserOutbreakID = value.OutbreakId;
                     OutbreakDia.OutbreakId = value.OutbreakId;
                     UserOutbreakIDUpdate = value.OutbreakId;
+                  
                 }
             }
         }
@@ -160,7 +161,7 @@ namespace disaster_management.ViewModels.ChildViewModels
         private async Task AddOutBreakDiaAsync()
         {
             if (_outbreakDiagnosisService == null) return;
-            await _outbreakDiagnosisService.AddAsync(OutbreakDia);
+            await _outbreakDiagnosisService.AddAsync(OutbreakDia.Clone());
             await GetAllOutBreakDiaAsync(); // Reload
         }
 

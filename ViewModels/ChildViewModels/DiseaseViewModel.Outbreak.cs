@@ -169,7 +169,7 @@ namespace disaster_management.ViewModels.ChildViewModels
             {
                 Outbreak.Status = "Đã xử lý";
             }
-            await _outbreakService.AddAsync(Outbreak);
+            await _outbreakService.AddAsync(Outbreak.Clone());
             await GetAllOutBreakAsync(); // Reload
         }
 
