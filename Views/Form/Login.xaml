@@ -1,0 +1,18 @@
+﻿<Window x:Class="disaster_management.Views.Form.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:disaster_management.Views.Form"
+        mc:Ignorable="d"
+        Title="Login" Height="137" Width="358">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Margin="45,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="45,41,0,0" VerticalAlignment="Top" Width="213"/>
+        <CheckBox Content="Nhớ mật khẩu" HorizontalAlignment="Left" Margin="45,72,0,0" VerticalAlignment="Top"/>
+        <Button Content="Đăng nhập" HorizontalAlignment="Left" Margin="263,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.197,-0.468" Height="57" Width="75"/>
+        <Label Content="Quên mật khẩu?" HorizontalAlignment="Left" Margin="187,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.11,-0.373"/>
+        
+
+    </Grid>
+</Window>
