@@ -7,6 +7,437 @@
              mc:Ignorable="d"  Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  Title  -->
+        <Grid
+        Width="250"
+        HorizontalAlignment="Left"
+        Background="#3393DF">
+            <TextBlock
+        Margin="10,0,0,0"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        FontSize="18"
+        Foreground="White"
+        Text="QUẢN LÝ HỆ THỐNG" />
+        </Grid>
+
+        <TabControl Grid.Row="1" Style="{StaticResource MahApps.Styles.TabControl.ColorPicker}">
+
+            <!--  Quản lý hành chính -->
+            <TabItem Header="Quản lý hành chính">
+
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                        Width="185"
+                        VerticalAlignment="Center"
+                        FontSize="14">
+                        Tra cứu theo cấp hành chính:
+                            </TextBlock>
+                            <ComboBox
+                         x:Name="ComboboxAdministrative"       
+                        Width="199"
+                        Height="30"
+                        FontSize="14"
+                        Style="{StaticResource MahApps.Styles.ComboBox}"
+                        SelectionChanged="ComboBoxAdminstrativeSection_SelectionChanged"
+                         >
+                                <ComboBoxItem IsSelected="True" Content="Tỉnh"/>
+                                <ComboBoxItem Content="Huyện"/>
+                                <ComboBoxItem Content="Xã"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <GroupBox
+                        Grid.Row="2"
+                        Margin="0,20,0,0"
+                        Header="Danh mục hành chính: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="AliceBlue" />
+                                <!--  phân trang  -->
+                                <StackPanel
+                            Grid.Row="1"
+                            Height="40"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Background="Transparent"
+                            Orientation="Horizontal">
+                                    <Button
+                                Width="80"
+                                Margin="0,0,5,0"
+                                Content="Đầu" />
+                                    <Button
+                                Width="80"
+                                Margin="5,0,5,0"
+                                Content="Trước" />
+                                    <Button
+                                Width="80"
+                                Margin="5,0,5,0"
+                                Content="Tiếp" />
+                                    <Button
+                                Width="80"
+                                Margin="5,0,0,0"
+                                Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                    <!--  END  Danh dách hành chính  -->
+
+                    <!--  Thao tác  -->
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <!--  Tìm kiếm -->
+                            <StackPanel
+                        Margin="10,10,0,0"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                            Width="90"
+                            Margin="5,0,0,0"
+                            Content="Tìm Kiếm"
+                            FontSize="16"
+                            Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
+                            <!--  Thao tac  -->
+                            <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU HÀNH CHÍNH">
+                                <TabControl Style="{StaticResource MahApps.Styles.TabControl}">
+                                    <!--  Thêm  -->
+                                    <TabItem Header="Thêm  ">
+                                        <StackPanel>
+                                            <!--  Tên cấp hành chỉnh, tùy theo cấp độ đã chọn  -->
+                                            <StackPanel
+                                            Margin="10,20,0,0"
+                                            VerticalAlignment="Top"
+                                            Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center" Text="Tên" x:Name="lbAdminstartiveName"/>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Chọn cấp trên nó  -->
+                                            <StackPanel
+                                            x:Name="ParentSelectionPanel"
+                                            Margin="10,5,0,0"
+                                            VerticalAlignment="Top"
+                                            Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Chọn cấp trên:</TextBlock>
+                                                <ComboBox
+                                                x:Name="ComboBoxParent"
+                                                Width="160"
+                                                FontSize="14"
+                                                DisplayMemberPath="Name" />
+                                            </StackPanel>
+                                            <Button
+                                        Height="40"
+                                        Margin="0,20,0,0"
+                                        FontSize="18">
+                                                THÊM
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+
+                                    <!--  Sửa  -->
+                                    <TabItem Header="Sửa  ">
+
+                                        <StackPanel>
+                                            <!--  ID   -->
+                                            <StackPanel
+                                        Margin="10,20,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã hành chính:</TextBlock>
+                                                <!--<mah:NumericUpDown Value="0" />-->
+                                            </StackPanel>
+                                            <!--  Tên cấp hành chỉnh, tùy theo cấp độ đã chọn  -->
+                                            <StackPanel
+                                            Margin="10,20,0,0"
+                                            VerticalAlignment="Top"
+                                            Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center" Text="Tên" x:Name="lbAdminstartiveName_Edit"/>
+                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                            </StackPanel>
+                                            <!--  Chọn cấp trên nó  -->
+                                            <StackPanel
+                                            x:Name="ParentSelectionPanel_Edit"
+                                            Margin="10,5,0,0"
+                                            VerticalAlignment="Top"
+                                            Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Chọn cấp trên:</TextBlock>
+                                                <ComboBox
+                                                x:Name="ComboBoxParent_Edit"
+                                                Width="160"
+                                                FontSize="14"
+                                                DisplayMemberPath="Name" />
+                                            </StackPanel>
+
+                                            <Button
+                                        Height="40"
+                                        Margin="0,20,0,0"
+                                        FontSize="18">
+                                                SỬA
+                                            </Button>
+                                        </StackPanel>
+                                    </TabItem>
+
+                                    <!--  XOÁ  -->
+                                    <TabItem Header="Xoá  ">
+                                        <!--  ID   -->
+                                        <StackPanel>
+
+                                            <StackPanel
+                                        Margin="10,20,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Mã hành chính:</TextBlock>
+                                                <!--<mah:NumericUpDown Value="0" />-->
+                                            </StackPanel>
+                                            <Button
+                                        Height="40"
+                                        Margin="0,20,0,0"
+                                        FontSize="18">
+                                                XOÁ
+                                            </Button>
+                                        </StackPanel>
+
+                                    </TabItem>
+
+                                </TabControl>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Quản lý người dùng">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <GroupBox
+                    Grid.Row="2"
+                    Margin="0,20,0,0"
+                    Header="Danh sách người dùng: ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                                Grid.Row="1"
+                                Height="40"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Background="Transparent"
+                                Orientation="Horizontal">
+                                    <Button
+                        Width="80"
+                        Margin="0,0,5,0"
+                        Content="Đầu" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,5,0"
+                        Content="Trước" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,5,0"
+                        Content="Tiếp" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,0,0"
+                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Quản lý nhóm người dùng">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+
+                        <GroupBox
+                        Grid.Row="2"
+                        Margin="0,20,0,0"
+                        Header="Danh sách nhóm người dùng: ">   
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="AliceBlue" />
+                                <!--  phân trang  -->
+                                <StackPanel
+                    Grid.Row="1"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Background="Transparent"
+                    Orientation="Horizontal">
+                                    <Button
+                        Width="80"
+                        Margin="0,0,5,0"
+                        Content="Đầu" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,5,0"
+                        Content="Trước" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,5,0"
+                        Content="Tiếp" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,0,0"
+                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Quản lý quyền">
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <GroupBox
+            Grid.Row="2"
+            Margin="0,20,0,0"
+            Header="Danh sách quyền">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                    Grid.Row="1"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Background="Transparent"
+                    Orientation="Horizontal">
+                                    <Button
+                        Width="80"
+                        Margin="0,0,5,0"
+                        Content="Đầu" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,5,0"
+                        Content="Trước" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,5,0"
+                        Content="Tiếp" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,0,0"
+                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log hệ thống">
+                <Grid Margin="10,0,0,0">                    
+                    <Grid>
+                        <GroupBox
+            Grid.Row="2"
+            Margin="0,20,0,0"
+            Header="Nhật ký hệ thống ">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="AliceBlue" />
+                                <!--  phan trang  -->
+                                <StackPanel
+                    Grid.Row="1"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Background="Transparent"
+                    Orientation="Horizontal">
+                                    <Button
+                        Width="80"
+                        Margin="0,0,5,0"
+                        Content="Đầu" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,5,0"
+                        Content="Trước" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,5,0"
+                        Content="Tiếp" />
+                                    <Button
+                        Width="80"
+                        Margin="5,0,0,0"
+                        Content="Cuối" />
+                                </StackPanel>
+                            </Grid>
+
+                        </GroupBox>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
