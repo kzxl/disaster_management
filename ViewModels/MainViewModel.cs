@@ -1,7 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using disaster_management.ViewModels.ChildViewModels;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace disaster_management.ViewModels
 {

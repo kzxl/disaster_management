@@ -22,7 +22,7 @@ namespace disaster_management.Data
             { typeof(Slaughterhouse), "SlaughterhouseId" },
             { typeof(SafeLivestockZone), "ZoneId" },
             { typeof(LivestockStatistic), "StatisticId" },
-            { typeof(TemporaryZone), "TemporaryZoneId" },
+            { typeof(TemporaryZone), "ZoneId" },
             { typeof(VeterinaryBranch), "BranchId" },
             { typeof(VetMedicineAgency), "AgencyId" }
         };

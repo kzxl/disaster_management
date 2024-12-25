@@ -67,6 +67,7 @@ namespace disaster_management.ViewModels.ChildViewModels
                 if (_selectedStatistic != value)
                 {
                     _selectedStatistic = value;
+                    StatisticUpdate = value.Clone(); // Create a copy   
                     OnPropertyChanged();
                 }
             }
@@ -93,6 +94,62 @@ namespace disaster_management.ViewModels.ChildViewModels
         public IAsyncRelayCommand DeleteStatisticCommand { get; }
         public IAsyncRelayCommand SearchStatisticCommand { get; }
 
+        #endregion
+
+        #region Functions
+        //Read
+        private async System.Threading.Tasks.Task LoadStatisticAsync()
+        {
+            try
+            {
+                StatisticList = new ObservableCollection<LivestockStatistic>(await livestockStatisticService.GetAllAsync());
+                Pagination_Statistic = new PaginationHelper<LivestockStatistic>(StatisticList, 18);
+            }
+            catch (Exception)
+            {
+            }
+          
+        }
+        //Create
+        private async System.Threading.Tasks.Task AddStatisticAsync()
+        {
+            try
+            {
+                await livestockStatisticService.AddAsync(Statistic.Clone());
+                await LoadStatisticAsync();
+            }
+            catch (Exception)
+            {
+            }
+           
+        }
+        // Update
+        private async System.Threading.Tasks.Task UpdateStatisticAsync()
+        {
+            try
+            {
+                await livestockStatisticService.UpdateAsync(StatisticUpdate);
+                await LoadStatisticAsync();
+            }
+            catch (Exception)
+            {
+            }
+          
+        }
+        // Delete
+        private async System.Threading.Tasks.Task DeleteStatisticAsync()
+        {
+            try
+            {
+                await livestockStatisticService.DeleteAsync(SelectedStatistic.StatisticId);
+                await LoadStatisticAsync();
+
+            }
+            catch (Exception)
+            {
+            }
+      
+        }
         #endregion
     }
 }

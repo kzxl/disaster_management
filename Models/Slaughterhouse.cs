@@ -9,5 +9,10 @@ namespace disaster_management.Models
         public string SlaughterhouseName { get; set; } = null!;
         public string? Address { get; set; }
         public int? Capacity { get; set; }
+
+        public Slaughterhouse Clone()
+        {
+            return (Slaughterhouse)this.MemberwiseClone();
+        }
     }
 }

@@ -10,5 +10,10 @@ namespace disaster_management.Models
         public string? ConditionDetail { get; set; }
 
         public virtual LivestockFarm? Farm { get; set; }
+
+        public LivestockFarmCondition Clone()
+        {
+            return this.MemberwiseClone() as LivestockFarmCondition;
+        }
     }
 }

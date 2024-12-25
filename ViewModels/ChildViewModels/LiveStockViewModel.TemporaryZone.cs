@@ -13,14 +13,8 @@ namespace disaster_management.ViewModels.ChildViewModels
         private PaginationHelper<TemporaryZone> _Pagination_TemporaryZone;
         public PaginationHelper<TemporaryZone> Pagination_TemporaryZone
         {
-            get
-            {
-                if (_Pagination_TemporaryZone == null)
-                {
-                    _Pagination_TemporaryZone = new PaginationHelper<TemporaryZone>(this.TemporaryZones);
-                }
-                return _Pagination_TemporaryZone;
-            }
+           get => _Pagination_TemporaryZone;
+            set => SetProperty(ref _Pagination_TemporaryZone, value);
         }
         // List
         private ObservableCollection<TemporaryZone> _TemporaryZones;
@@ -71,6 +65,7 @@ namespace disaster_management.ViewModels.ChildViewModels
             get { return _SelectedTemporaryZone; }
             set
             {
+                TemporaryZoneUpdate = value.Clone();
                 SetProperty(ref _SelectedTemporaryZone, value);
                
             }
@@ -96,6 +91,62 @@ namespace disaster_management.ViewModels.ChildViewModels
         public IAsyncRelayCommand UpdateTemporaryZoneCommand { get; }
         public IAsyncRelayCommand DeleteTemporaryZoneCommand { get; }
         public IAsyncRelayCommand SearchTemporaryZoneCommand { get; }
+
+        #endregion
+
+        #region Methods
+
+        //Read
+
+        private async Task LoadTemporaryZoneAsync()
+        {
+            TemporaryZones = new ObservableCollection<TemporaryZone>(await temporaryZoneService.GetAllAsync());
+            Pagination_TemporaryZone = new PaginationHelper<TemporaryZone>(TemporaryZones, 18);
+        }
+
+        //Add
+        private async Task AddTemporaryZoneAsync()
+        {
+            try
+            {
+                await temporaryZoneService.AddAsync(TemporaryZone.Clone());
+                await LoadTemporaryZoneAsync();
+            }
+            catch (Exception)
+            {
+
+            }
+           
+        }
+
+        // Update 
+        private async Task UpdateTemporaryZoneAsync()
+        {
+            try
+            {
+                await temporaryZoneService.UpdateAsync(TemporaryZoneUpdate.Clone());
+                await LoadTemporaryZoneAsync();
+
+            }
+            catch (Exception)
+            {
+            }
+           
+        }
+
+        //Delete 
+        private async Task DeleteTemporaryZoneAsync()
+        {
+            try
+            {
+                await temporaryZoneService.DeleteAsync(SelectedTemporaryZone.ZoneId);
+                await LoadTemporaryZoneAsync();
+            }
+            catch (Exception)
+            {
+            }
+          
+        }
 
         #endregion
 

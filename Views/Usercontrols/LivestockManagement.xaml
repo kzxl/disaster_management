@@ -214,7 +214,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Tên chi cục:</TextBlock>
-                                                <TextBox Text="{Binding VeterinaryBranchUpdate.BranchName}" Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding VeterinaryBranchUpdate.BranchName}" />
                                             </StackPanel>
                                             <!--  Địa chỉ  -->
                                             <StackPanel
@@ -222,7 +225,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
-                                                <TextBox Text="{Binding VeterinaryBranchUpdate.Address}" Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding VeterinaryBranchUpdate.Address}" />
                                             </StackPanel>
                                             <!--  Số điện thoại  -->
                                             <StackPanel
@@ -230,11 +236,15 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Số điện thoại:</TextBlock>
-                                                <TextBox Text="{Binding VeterinaryBranchUpdate.Phone}" Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding VeterinaryBranchUpdate.Phone}" />
                                             </StackPanel>
-                                            <Button Command="{Binding UpdateVeterinaryBranchCommand}"
+                                            <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding UpdateVeterinaryBranchCommand}"
                                                 FontSize="18">
                                                 SỬA
                                             </Button>
@@ -253,14 +263,15 @@
                                                 <TextBlock Width="90" VerticalAlignment="Center">Mã chi cục:</TextBlock>
                                                 <TextBox
                                                     Width="160"
-                                                    Text="{Binding SelectedVeterinaryBranch.BranchId}"
                                                     IsReadOnly="True"
-                                                    Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding SelectedVeterinaryBranch.BranchId}" />
 
                                             </StackPanel>
-                                            <Button Command="{Binding DeleteVeterinaryBranchCommand}"
+                                            <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding DeleteTemporaryZoneCommand}"
                                                 FontSize="18">
                                                 XOÁ
                                             </Button>
@@ -295,17 +306,20 @@
                                 FontSize="14">
                                 Tra cứu theo trạng thái:
                             </TextBlock>
-                            <ComboBox
-                                Width="160"
-                                Height="30"
-                                Margin="20,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="14"
-                                Style="{StaticResource MahApps.Styles.ComboBox}">
-                                <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
-                                <ComboBoxItem>Đang xử lý</ComboBoxItem>
-                                <ComboBoxItem>Đã xử lý</ComboBoxItem>
-                            </ComboBox>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
                         </StackPanel>
 
                         <GroupBox
@@ -320,7 +334,9 @@
                                 <DataGrid
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Background="AliceBlue" />
+                                    Background="AliceBlue"
+                                    ItemsSource="{Binding Pagination_VetMedicineAgency.PagedItems}"
+                                    SelectedItem="{Binding SelectedVetMedicineAgency}" />
                                 <!--  phan trang  -->
                                 <StackPanel
                                     Grid.Row="1"
@@ -356,20 +372,7 @@
                     <!--  Thao tác  -->
                     <Grid Grid.Column="1">
                         <StackPanel>
-                            <!--  Timf kieems  -->
-                            <StackPanel
-                                Margin="10,10,0,0"
-                                VerticalAlignment="Top"
-                                Orientation="Horizontal">
 
-                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                <Button
-                                    Width="90"
-                                    Margin="5,0,0,0"
-                                    Content="Tìm Kiếm"
-                                    FontSize="16"
-                                    Style="{StaticResource MahApps.Styles.Button}" />
-                            </StackPanel>
                             <!--  Thao tac  -->
                             <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU ĐẠI LÝ">
                                 <Grid>
@@ -386,7 +389,10 @@
                                                     VerticalAlignment="Top"
                                                     Orientation="Horizontal">
                                                     <TextBlock Width="90" VerticalAlignment="Center">Tên đại lý:</TextBlock>
-                                                    <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                    <TextBox
+                                                        Width="160"
+                                                        Style="{StaticResource MahApps.Styles.TextBox}"
+                                                        Text="{Binding VetMedicineAgency.AgencyName}" />
                                                 </StackPanel>
                                                 <!--  Địa chỉ  -->
                                                 <StackPanel
@@ -394,7 +400,10 @@
                                                     VerticalAlignment="Top"
                                                     Orientation="Horizontal">
                                                     <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
-                                                    <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                    <TextBox
+                                                        Width="160"
+                                                        Style="{StaticResource MahApps.Styles.TextBox}"
+                                                        Text="{Binding VetMedicineAgency.Address}" />
                                                 </StackPanel>
                                                 <!--  Số điện thoại  -->
                                                 <StackPanel
@@ -402,12 +411,16 @@
                                                     VerticalAlignment="Top"
                                                     Orientation="Horizontal">
                                                     <TextBlock Width="90" VerticalAlignment="Center">Số điện thoại:</TextBlock>
-                                                    <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                    <TextBox
+                                                        Width="160"
+                                                        Style="{StaticResource MahApps.Styles.TextBox}"
+                                                        Text="{Binding VetMedicineAgency.Phone}" />
                                                 </StackPanel>
 
                                                 <Button
                                                     Height="40"
                                                     Margin="0,20,0,0"
+                                                    Command="{Binding AddVetMedicineAgencyCommand}"
                                                     FontSize="18">
                                                     THÊM
                                                 </Button>
@@ -419,21 +432,17 @@
                                         <TabItem Header="Sửa">
 
                                             <StackPanel>
-                                                <!--  ID ten dai li  -->
-                                                <StackPanel
-                                                    Margin="10,20,0,0"
-                                                    VerticalAlignment="Top"
-                                                    Orientation="Horizontal">
-                                                    <TextBlock Width="90" VerticalAlignment="Center">Mã đại lý:</TextBlock>
-                                                    <mah:NumericUpDown Value="0" />
-                                                </StackPanel>
+
                                                 <!--  Tên đại lý  -->
                                                 <StackPanel
                                                     Margin="10,20,0,0"
                                                     VerticalAlignment="Top"
                                                     Orientation="Horizontal">
                                                     <TextBlock Width="90" VerticalAlignment="Center">Tên đại lý:</TextBlock>
-                                                    <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                    <TextBox
+                                                        Width="160"
+                                                        Style="{StaticResource MahApps.Styles.TextBox}"
+                                                        Text="{Binding VetMedicineAgencyUpdate.AgencyName}" />
                                                 </StackPanel>
                                                 <!--  Địa chỉ  -->
                                                 <StackPanel
@@ -441,7 +450,10 @@
                                                     VerticalAlignment="Top"
                                                     Orientation="Horizontal">
                                                     <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
-                                                    <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                    <TextBox
+                                                        Width="160"
+                                                        Style="{StaticResource MahApps.Styles.TextBox}"
+                                                        Text="{Binding VetMedicineAgencyUpdate.Address}" />
                                                 </StackPanel>
                                                 <!--  Số điện thoại  -->
                                                 <StackPanel
@@ -449,11 +461,15 @@
                                                     VerticalAlignment="Top"
                                                     Orientation="Horizontal">
                                                     <TextBlock Width="90" VerticalAlignment="Center">Số điện thoại:</TextBlock>
-                                                    <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                    <TextBox
+                                                        Width="160"
+                                                        Style="{StaticResource MahApps.Styles.TextBox}"
+                                                        Text="{Binding VetMedicineAgencyUpdate.Phone}" />
                                                 </StackPanel>
                                                 <Button
                                                     Height="40"
                                                     Margin="0,20,0,0"
+                                                    Command="{Binding UpdateVetMedicineAgencyCommand}"
                                                     FontSize="18">
                                                     SỬA
                                                 </Button>
@@ -470,11 +486,15 @@
                                                     VerticalAlignment="Top"
                                                     Orientation="Horizontal">
                                                     <TextBlock Width="90" VerticalAlignment="Center">Mã đại lý:</TextBlock>
-                                                    <mah:NumericUpDown Value="0" />
+                                                    <TextBox
+                                                        Width="160"
+                                                        IsReadOnly="True"
+                                                        Text="{Binding SelectedVetMedicineAgency.AgencyId}" />
                                                 </StackPanel>
                                                 <Button
                                                     Height="40"
                                                     Margin="0,20,0,0"
+                                                    Command="{Binding DeleteVetMedicineAgencyCommand}"
                                                     FontSize="18">
                                                     XOÁ
                                                 </Button>
@@ -511,17 +531,20 @@
                                 FontSize="14">
                                 Tra cứu theo trạng thái:
                             </TextBlock>
-                            <ComboBox
-                                Width="160"
-                                Height="30"
-                                Margin="20,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="14"
-                                Style="{StaticResource MahApps.Styles.ComboBox}">
-                                <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
-                                <ComboBoxItem>Đang xử lý</ComboBoxItem>
-                                <ComboBoxItem>Đã xử lý</ComboBoxItem>
-                            </ComboBox>
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
                         </StackPanel>
 
                         <GroupBox
@@ -536,7 +559,9 @@
                                 <DataGrid
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Background="AliceBlue" />
+                                    Background="AliceBlue"
+                                    ItemsSource="{Binding Pagination_TemporaryZone.PagedItems}"
+                                    SelectedItem="{Binding SelectedTemporaryZone}" />
                                 <!--  phan trang  -->
                                 <StackPanel
                                     Grid.Row="1"
@@ -572,20 +597,7 @@
                     <!--  Thao tác  -->
                     <Grid Grid.Column="1">
                         <StackPanel>
-                            <!--  Timf kieems  -->
-                            <StackPanel
-                                Margin="10,10,0,0"
-                                VerticalAlignment="Top"
-                                Orientation="Horizontal">
 
-                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                <Button
-                                    Width="90"
-                                    Margin="5,0,0,0"
-                                    Content="Tìm Kiếm"
-                                    FontSize="16"
-                                    Style="{StaticResource MahApps.Styles.Button}" />
-                            </StackPanel>
                             <!--  Thao tac  -->
                             <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU KHU TẠM GIỮ - TIÊU HUỶ">
                                 <TabControl>
@@ -599,7 +611,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Tên khu:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding TemporaryZone.ZoneName}" />
                                             </StackPanel>
 
                                             <!--  dia chi  -->
@@ -608,7 +623,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding TemporaryZone.Address}" />
                                             </StackPanel>
 
                                             <!--  suc chưa  -->
@@ -617,12 +635,13 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Sức chứa:</TextBlock>
-                                                <mah:NumericUpDown Width="100" Value="0" />
+                                                <mah:NumericUpDown Width="100" Value="{Binding TemporaryZone.Capacity}" />
                                             </StackPanel>
 
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding AddTemporaryZoneCommand}"
                                                 FontSize="18">
                                                 THÊM
                                             </Button>
@@ -642,7 +661,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Tên khu:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding TemporaryZoneUpdate.ZoneName}" />
                                             </StackPanel>
 
                                             <!--  dia chi  -->
@@ -651,7 +673,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding TemporaryZoneUpdate.Address}" />
                                             </StackPanel>
 
                                             <!--  suc chưa  -->
@@ -660,14 +685,15 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Sức chứa:</TextBlock>
-                                                <mah:NumericUpDown Width="100" Value="0" />
+                                                <mah:NumericUpDown Width="100" Value="{Binding TemporaryZoneUpdate.Capacity}" />
                                             </StackPanel>
 
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding UpdateTemporaryZoneCommand}"
                                                 FontSize="18">
-                                                THÊM
+                                                SỬA
                                             </Button>
                                         </StackPanel>
                                     </TabItem>
@@ -682,11 +708,15 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Mã khu:</TextBlock>
-                                                <mah:NumericUpDown Value="0" />
+                                                <TextBox
+                                                    Width="160"
+                                                    IsReadOnly="True"
+                                                    Text="{Binding SelectedTemporaryZone.ZoneId}" />
                                             </StackPanel>
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding DeleteTemporaryZoneCommand}"
                                                 FontSize="18">
                                                 XOÁ
                                             </Button>
@@ -721,32 +751,20 @@
                                 FontSize="14">
                                 Tra cứu theo ngày:
                             </TextBlock>
-                            <TextBlock
-                                Width="auto"
-                                VerticalAlignment="Center"
-                                FontSize="14">
-                                Bắt đầu:
-                            </TextBlock>
-                            <mah:DateTimePicker Width="160" Height="30" />
-                            <TextBlock
-                                Width="auto"
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="14">
-                                Kết thúc:
-                            </TextBlock>
-                            <mah:DateTimePicker Width="160" Height="30" />
-                            <!--<ComboBox
-                             Width="160"
-                             Height="30"
-                             Margin="20,0,0,0"
-                             VerticalAlignment="Center"
-                             FontSize="14"
-                             Style="{StaticResource MahApps.Styles.ComboBox}">
-                             <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
-                             <ComboBoxItem>Đang xử lý</ComboBoxItem>
-                             <ComboBoxItem>Đã xử lý</ComboBoxItem>
-                         </ComboBox>-->
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
                         </StackPanel>
 
                         <GroupBox
@@ -761,7 +779,9 @@
                                 <DataGrid
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Background="AliceBlue" />
+                                    Background="AliceBlue"
+                                    ItemsSource="{Binding Pagination_Slaughterhouse.PagedItems}"
+                                    SelectedItem="{Binding SelectedSlaughterhouse}" />
                                 <!--  phan trang  -->
                                 <StackPanel
                                     Grid.Row="1"
@@ -797,20 +817,7 @@
                     <!--  Thao tác  -->
                     <Grid Grid.Column="1">
                         <StackPanel>
-                            <!--  Timf kieems  -->
-                            <StackPanel
-                                Margin="10,10,0,0"
-                                VerticalAlignment="Top"
-                                Orientation="Horizontal">
 
-                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                <Button
-                                    Width="90"
-                                    Margin="5,0,0,0"
-                                    Content="Tìm Kiếm"
-                                    FontSize="16"
-                                    Style="{StaticResource MahApps.Styles.Button}" />
-                            </StackPanel>
                             <!--  Thao tac  -->
                             <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU CƠ Sở giết mổ">
                                 <TabControl>
@@ -824,7 +831,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Tên cơ sở:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding Slaughterhouse.SlaughterhouseName}" />
                                             </StackPanel>
                                             <!--  ngay  -->
                                             <StackPanel
@@ -832,7 +842,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding Slaughterhouse.Address}" />
                                             </StackPanel>
                                             <!--  suc chưa  -->
                                             <StackPanel
@@ -840,13 +853,14 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Sức chứa:</TextBlock>
-                                                <mah:NumericUpDown Width="100" Value="0" />
+                                                <mah:NumericUpDown Width="100" Value="{Binding Slaughterhouse.Capacity}" />
                                             </StackPanel>
 
 
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding AddSlaughterhouseCommand}"
                                                 FontSize="18">
                                                 THÊM
                                             </Button>
@@ -858,40 +872,42 @@
                                     <TabItem Header="Sửa">
 
                                         <StackPanel>
-
-
                                             <!--  Ten vacxin  -->
                                             <StackPanel
                                                 Margin="10,20,0,0"
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
-                                                <TextBlock Width="90" VerticalAlignment="Center">Tên vacxin:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBlock Width="90" VerticalAlignment="Center">Tên cơ sở:</TextBlock>
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding SlaughterhouseUpdate.SlaughterhouseName}" />
                                             </StackPanel>
                                             <!--  ngay  -->
                                             <StackPanel
                                                 Margin="10,5,0,0"
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
-                                                <TextBlock Width="90" VerticalAlignment="Center">Ngày:</TextBlock>
-                                                <mah:DateTimePicker Width="160" />
+                                                <TextBlock Width="90" VerticalAlignment="Center">Địa chỉ:</TextBlock>
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding SlaughterhouseUpdate.Address}" />
                                             </StackPanel>
-                                            <!--  O dich  -->
+                                            <!--  suc chưa  -->
                                             <StackPanel
                                                 Margin="10,5,0,0"
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
-                                                <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                                <Button Width="40" Margin="2,0,0,0">
-                                                    ...
-                                                </Button>
+                                                <TextBlock Width="90" VerticalAlignment="Center">Sức chứa:</TextBlock>
+                                                <mah:NumericUpDown Width="100" Value="{Binding SlaughterhouseUpdate.Capacity}" />
                                             </StackPanel>
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding UpdateSlaughterhouseCommand}"
                                                 FontSize="18">
-                                                THÊM
+                                                SỬA
                                             </Button>
                                         </StackPanel>
                                     </TabItem>
@@ -906,11 +922,15 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Mã cơ sở:</TextBlock>
-                                                <mah:NumericUpDown Value="0" />
+                                                <TextBox
+                                                    Width="160"
+                                                    IsReadOnly="True"
+                                                    Text="{Binding SelectedSlaughterhouse.SlaughterhouseId}" />
                                             </StackPanel>
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding DeleteSlaughterhouseCommand}"
                                                 FontSize="18">
                                                 XOÁ
                                             </Button>
@@ -946,32 +966,20 @@
                                 FontSize="14">
                                 Tra cứu theo ngày:
                             </TextBlock>
-                            <TextBlock
-                                Width="auto"
-                                VerticalAlignment="Center"
-                                FontSize="14">
-                                Bắt đầu:
-                            </TextBlock>
-                            <mah:DateTimePicker Width="160" Height="30" />
-                            <TextBlock
-                                Width="auto"
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="14">
-                                Kết thúc:
-                            </TextBlock>
-                            <mah:DateTimePicker Width="160" Height="30" />
-                            <!--<ComboBox
-              Width="160"
-              Height="30"
-              Margin="20,0,0,0"
-              VerticalAlignment="Center"
-              FontSize="14"
-              Style="{StaticResource MahApps.Styles.ComboBox}">
-              <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
-              <ComboBoxItem>Đang xử lý</ComboBoxItem>
-              <ComboBoxItem>Đã xử lý</ComboBoxItem>
-          </ComboBox>-->
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
                         </StackPanel>
 
                         <GroupBox
@@ -1026,20 +1034,7 @@
                     <!--  Thao tác  -->
                     <Grid Grid.Column="1">
                         <StackPanel>
-                            <!--  Timf kieems  -->
-                            <StackPanel
-                                Margin="10,10,0,0"
-                                VerticalAlignment="Top"
-                                Orientation="Horizontal">
 
-                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                <Button
-                                    Width="90"
-                                    Margin="5,0,0,0"
-                                    Content="Tìm Kiếm"
-                                    FontSize="16"
-                                    Style="{StaticResource MahApps.Styles.Button}" />
-                            </StackPanel>
                             <!--  Thao tac  -->
                             <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU TRIỆU CHỨNG LÂM SÀNG">
                                 <TabControl>
@@ -1218,21 +1213,20 @@
                                 FontSize="14">
                                 Tra cứu theo ngày:
                             </TextBlock>
-                            <TextBlock
-                                Width="auto"
-                                VerticalAlignment="Center"
-                                FontSize="14">
-                                Bắt đầu:
-                            </TextBlock>
-                            <mah:DateTimePicker Width="160" Height="30" />
-                            <TextBlock
-                                Width="auto"
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="14">
-                                Kết thúc:
-                            </TextBlock>
-                            <mah:DateTimePicker Width="160" Height="30" />
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
 
                         </StackPanel>
 
@@ -1248,7 +1242,9 @@
                                 <DataGrid
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Background="AliceBlue" />
+                                    Background="AliceBlue"
+                                    ItemsSource="{Binding Pagination_FarmCondition.PagedItems}"
+                                    SelectedItem="{Binding SelectedFarmCondition}" />
                                 <!--  phan trang  -->
                                 <StackPanel
                                     Grid.Row="1"
@@ -1284,20 +1280,7 @@
                     <!--  Thao tác  -->
                     <Grid Grid.Column="1">
                         <StackPanel>
-                            <!--  Timf kieems  -->
-                            <StackPanel
-                                Margin="10,10,0,0"
-                                VerticalAlignment="Top"
-                                Orientation="Horizontal">
 
-                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                <Button
-                                    Width="90"
-                                    Margin="5,0,0,0"
-                                    Content="Tìm Kiếm"
-                                    FontSize="16"
-                                    Style="{StaticResource MahApps.Styles.Button}" />
-                            </StackPanel>
                             <!--  Thao tac  -->
                             <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU điều kiện chăn nuôi">
                                 <TabControl>
@@ -1312,7 +1295,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Thông tin:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding FarmCondition.ConditionDetail}" />
                                             </StackPanel>
                                             <!--  O dich  -->
                                             <StackPanel
@@ -1320,8 +1306,14 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Cơ sở chăn nuôi:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                                <Button Width="40" Margin="2,0,0,0">
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding FarmCondition.FarmId}" />
+                                                <Button
+                                                    Width="40"
+                                                    Margin="2,0,0,0"
+                                                    Command="{Binding OpenFarmWindowCommand}">
                                                     ...
                                                 </Button>
                                             </StackPanel>
@@ -1329,6 +1321,7 @@
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding AddFarmConditionCommand}"
                                                 FontSize="18">
                                                 THÊM
                                             </Button>
@@ -1341,38 +1334,40 @@
 
                                         <StackPanel>
 
-                                            <!--  Ten triu chung  -->
-                                            <StackPanel
-                                                Margin="10,20,0,0"
-                                                VerticalAlignment="Top"
-                                                Orientation="Horizontal">
-                                                <TextBlock Width="90" VerticalAlignment="Center">Tên triệu chứng:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                            </StackPanel>
                                             <!--  mo ta  -->
                                             <StackPanel
                                                 Margin="10,5,0,0"
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
-                                                <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                                <TextBlock Width="90" VerticalAlignment="Center">Thông tin:</TextBlock>
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding FarmConditionUpdate.ConditionDetail}" />
                                             </StackPanel>
                                             <!--  O dich  -->
                                             <StackPanel
                                                 Margin="10,5,0,0"
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
-                                                <TextBlock Width="90" VerticalAlignment="Center">Ổ dịch:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                                <Button Width="40" Margin="2,0,0,0">
+                                                <TextBlock Width="90" VerticalAlignment="Center">Cơ sở chăn nuôi:</TextBlock>
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding FarmConditionUpdate.FarmId}" />
+                                                <Button
+                                                    Width="40"
+                                                    Margin="2,0,0,0"
+                                                    Command="{Binding OpenFarmWindowCommand}">
                                                     ...
                                                 </Button>
                                             </StackPanel>
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding UpdateFarmConditionCommand}"
                                                 FontSize="18">
-                                                THÊM
+                                                SỬA
                                             </Button>
                                         </StackPanel>
                                     </TabItem>
@@ -1387,11 +1382,15 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Mã triệu chứng:</TextBlock>
-                                                <mah:NumericUpDown Value="0" />
+                                                <TextBox
+                                                    Width="160"
+                                                    IsReadOnly="True"
+                                                    Text="{Binding SelectedFarmCondition.ConditionId}" />
                                             </StackPanel>
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding DeleteFarmConditionCommand}"
                                                 FontSize="18">
                                                 XOÁ
                                             </Button>
@@ -1684,32 +1683,20 @@
                                 FontSize="14">
                                 Tra cứu theo ngày:
                             </TextBlock>
-                            <TextBlock
-                                Width="auto"
-                                VerticalAlignment="Center"
-                                FontSize="14">
-                                Bắt đầu:
-                            </TextBlock>
-                            <mah:DateTimePicker Width="160" Height="30" />
-                            <TextBlock
-                                Width="auto"
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="14">
-                                Kết thúc:
-                            </TextBlock>
-                            <mah:DateTimePicker Width="160" Height="30" />
-                            <!--<ComboBox
-    Width="160"
-    Height="30"
-    Margin="20,0,0,0"
-    VerticalAlignment="Center"
-    FontSize="14"
-    Style="{StaticResource MahApps.Styles.ComboBox}">
-    <ComboBoxItem IsSelected="True">Mới phát hiện</ComboBoxItem>
-    <ComboBoxItem>Đang xử lý</ComboBoxItem>
-    <ComboBoxItem>Đã xử lý</ComboBoxItem>
-</ComboBox>-->
+                            <!--  Timf kieems  -->
+                            <StackPanel
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+
+                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                                <Button
+                                    Width="90"
+                                    Margin="5,0,0,0"
+                                    Content="Tìm Kiếm"
+                                    FontSize="16"
+                                    Style="{StaticResource MahApps.Styles.Button}" />
+                            </StackPanel>
                         </StackPanel>
 
                         <GroupBox
@@ -1724,7 +1711,9 @@
                                 <DataGrid
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Background="AliceBlue" />
+                                    Background="AliceBlue"
+                                    ItemsSource="{Binding Pagination_Statistic.PagedItems}"
+                                    SelectedItem="{Binding SelectedStatistic}" />
                                 <!--  phan trang  -->
                                 <StackPanel
                                     Grid.Row="1"
@@ -1760,20 +1749,7 @@
                     <!--  Thao tác  -->
                     <Grid Grid.Column="1">
                         <StackPanel>
-                            <!--  Timf kieems  -->
-                            <StackPanel
-                                Margin="10,10,0,0"
-                                VerticalAlignment="Top"
-                                Orientation="Horizontal">
 
-                                <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                <Button
-                                    Width="90"
-                                    Margin="5,0,0,0"
-                                    Content="Tìm Kiếm"
-                                    FontSize="16"
-                                    Style="{StaticResource MahApps.Styles.Button}" />
-                            </StackPanel>
                             <!--  Thao tac  -->
                             <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU Kết quả thống kê các hộ chăn nuôi nhỏ lẻ: ">
                                 <TabControl>
@@ -1787,7 +1763,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Ngày thống kê:</TextBlock>
-                                                <mah:DateTimePicker Width="160" />
+                                                <mah:DateTimePicker Width="160" SelectedDateTime="{Binding Statistic.StatisticDate}" />
                                             </StackPanel>
                                             <!--  loai vat nuoi  -->
                                             <StackPanel
@@ -1795,16 +1771,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Loại vật nuôi:</TextBlock>
-                                                <ComboBox
+                                                <TextBox
                                                     Width="160"
-                                                    VerticalAlignment="Center"
-                                                    Style="{StaticResource MahApps.Styles.ComboBox}">
-                                                    <ComboBoxItem IsSelected="True">Gia súc</ComboBoxItem>
-                                                    <ComboBoxItem>Gia cầm</ComboBoxItem>
-                                                    <ComboBoxItem>Thuỷ sản</ComboBoxItem>
-                                                    <ComboBoxItem>Thú cưng</ComboBoxItem>
-                                                    <ComboBoxItem>Khác</ComboBoxItem>
-                                                </ComboBox>
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding Statistic.AnimalType}" />
                                             </StackPanel>
                                             <!--  so luong  -->
                                             <StackPanel
@@ -1812,7 +1782,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Số lượng:</TextBlock>
-                                                <mah:NumericUpDown Width="100" Value="0" />
+                                                <mah:NumericUpDown Width="100" Value="{Binding Statistic.AnimalCount}" />
                                             </StackPanel>
                                             <!--  cơ sơ chan nuoi  -->
                                             <StackPanel
@@ -1820,8 +1790,14 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Cơ sở chăn nuôi:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                                <Button Width="40" Margin="2,0,0,0">
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding Statistic.FarmId}" />
+                                                <Button
+                                                    Width="40"
+                                                    Margin="2,0,0,0"
+                                                    Command="{Binding OpenFarmWindowCommand}">
                                                     ...
                                                 </Button>
                                             </StackPanel>
@@ -1829,6 +1805,7 @@
                                             <Button
                                                 Height="40"
                                                 Margin="0,20,0,0"
+                                                Command="{Binding AddStatisticCommand}"
                                                 FontSize="18">
                                                 THÊM
                                             </Button>
@@ -1841,13 +1818,14 @@
 
                                         <StackPanel>
 
+
                                             <!--  ngay thong ke  -->
                                             <StackPanel
                                                 Margin="10,5,0,0"
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Ngày thống kê:</TextBlock>
-                                                <mah:DateTimePicker Width="160" />
+                                                <mah:DateTimePicker Width="160" SelectedDateTime="{Binding StatisticUpdate.StatisticDate}" />
                                             </StackPanel>
                                             <!--  loai vat nuoi  -->
                                             <StackPanel
@@ -1855,16 +1833,10 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Loại vật nuôi:</TextBlock>
-                                                <ComboBox
+                                                <TextBox
                                                     Width="160"
-                                                    VerticalAlignment="Center"
-                                                    Style="{StaticResource MahApps.Styles.ComboBox}">
-                                                    <ComboBoxItem IsSelected="True">Gia súc</ComboBoxItem>
-                                                    <ComboBoxItem>Gia cầm</ComboBoxItem>
-                                                    <ComboBoxItem>Thuỷ sản</ComboBoxItem>
-                                                    <ComboBoxItem>Thú cưng</ComboBoxItem>
-                                                    <ComboBoxItem>Khác</ComboBoxItem>
-                                                </ComboBox>
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding StatisticUpdate.AnimalType}" />
                                             </StackPanel>
                                             <!--  so luong  -->
                                             <StackPanel
@@ -1872,7 +1844,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Số lượng:</TextBlock>
-                                                <mah:NumericUpDown Width="100" Value="0" />
+                                                <mah:NumericUpDown Width="100" Value="{Binding StatisticUpdate.AnimalCount}" />
                                             </StackPanel>
                                             <!--  cơ sơ chan nuoi  -->
                                             <StackPanel
@@ -1880,16 +1852,25 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Cơ sở chăn nuôi:</TextBlock>
-                                                <TextBox Width="160" Style="{StaticResource MahApps.Styles.TextBox}" />
-                                                <Button Width="40" Margin="2,0,0,0">
+                                                <TextBox
+                                                    Width="160"
+                                                    Style="{StaticResource MahApps.Styles.TextBox}"
+                                                    Text="{Binding StatisticUpdate.FarmId}" />
+                                                <Button
+                                                    Width="40"
+                                                    Margin="2,0,0,0"
+                                                    Command="{Binding OpenFarmWindowCommand}">
                                                     ...
                                                 </Button>
                                             </StackPanel>
-                                            <Button
+
+
+
+                                            <Button Command="{Binding UpdateStatisticCommand}"
                                                 Height="40"
                                                 Margin="0,20,0,0"
                                                 FontSize="18">
-                                                THÊM
+                                                SỬA
                                             </Button>
                                         </StackPanel>
                                     </TabItem>
@@ -1904,9 +1885,9 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="90" VerticalAlignment="Center">Mã thống kê:</TextBlock>
-                                                <mah:NumericUpDown Width="100" Value="0" />
+                                                <TextBox Text="{Binding SelectedStatistic.StatisticId}" Width="160" IsReadOnly="True" />
                                             </StackPanel>
-                                            <Button
+                                            <Button Command="{Binding DeleteStatisticCommand}"
                                                 Height="40"
                                                 Margin="0,20,0,0"
                                                 FontSize="18">
@@ -2108,7 +2089,7 @@
                                                 VerticalAlignment="Top"
                                                 Orientation="Horizontal">
                                                 <TextBlock Width="120" VerticalAlignment="Center">Mã vùng an toàn:</TextBlock>
-                                                <mah:NumericUpDown Width="100" Value="0" />
+                                                <TextBox Width="160" IsReadOnly="True" />
                                             </StackPanel>
                                             <Button
                                                 Height="40"

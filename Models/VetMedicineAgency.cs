@@ -10,5 +10,10 @@ namespace disaster_management.Models
         public string AgencyName { get; set; } = null!;
         public string? Address { get; set; }
         public string? Phone { get; set; }
+
+        internal VetMedicineAgency Clone()
+        {
+            return (VetMedicineAgency)this.MemberwiseClone(); 
+        }
     }
 }

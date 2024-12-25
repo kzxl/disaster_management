@@ -75,7 +75,7 @@ namespace disaster_management.ViewModels.ChildViewModels
                 SetProperty(ref _SelectedFarmCondition, value);
                 if (value != null)
                 {
-                   // _SelectedFarmCondition = value.Clone(); // Create a copy
+                    FarmConditionUpdate = value.Clone();
                 }
             }
         }
@@ -109,6 +109,7 @@ namespace disaster_management.ViewModels.ChildViewModels
         #endregion
 
         #region Function 
+        //Read
         private async Task LoadFarmConditionAsync()
         {
             try
@@ -121,6 +122,46 @@ namespace disaster_management.ViewModels.ChildViewModels
                
             }
 
+        }
+
+        //Create
+        private async Task AddFarmConditionAsync()
+        {
+            try
+            {
+                await livestockFarmConditionService.AddAsync(FarmCondition.Clone());
+                await LoadFarmConditionAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        // Update 
+        private async Task UpdateFarmConditionAsync()
+        {
+            try
+            {
+                await livestockFarmConditionService.UpdateAsync(FarmConditionUpdate.Clone());
+                await LoadFarmConditionAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        // Delete
+        private async Task DeleteFarmConditionAsync()
+        {
+            try
+            {
+                await livestockFarmConditionService.DeleteAsync(SelectedFarmCondition.ConditionId);
+                await LoadFarmConditionAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         #endregion
     }

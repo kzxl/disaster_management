@@ -16,7 +16,7 @@ namespace disaster_management.ViewModels.ChildViewModels
         private readonly ICertificateService certiticateService;
         private readonly ILivestockFarmService livestockFarmService;
         private readonly ILivestockFarmConditionService livestockFarmConditionService;
-        private readonly ISlaughterhouseService slaughterhouse;
+        private readonly ISlaughterhouseService slaughterhouseService;
         private readonly ISafeLivestockZoneService safeLivestockZoneService;
         private readonly ILivestockStatisticService livestockStatisticService;
         private readonly ITemporaryZoneService temporaryZoneService;
@@ -37,7 +37,7 @@ namespace disaster_management.ViewModels.ChildViewModels
             this.certiticateService = certiticateService;
             this.livestockFarmService = livestockFarmService;
             this.livestockFarmConditionService = livestockFarmConditionService;
-            this.slaughterhouse = slaughterhouse;
+            this.slaughterhouseService = slaughterhouse;
             this.safeLivestockZoneService = safeLivestockZoneService;
             this.livestockStatisticService = livestockStatisticService;
             this.temporaryZoneService = temporaryZoneService;
@@ -51,12 +51,43 @@ namespace disaster_management.ViewModels.ChildViewModels
             UpdateVeterinaryBranchCommand = new AsyncRelayCommand(UpdateVeterinaryBranchAsync);
             DeleteVeterinaryBranchCommand = new AsyncRelayCommand(DeleteVeterinaryBranchAsync);
 
+            //Đại lý bán thuốc thú y
+            LoadVetMedicineAgencyCommand = new AsyncRelayCommand(LoadVetMedicineAgencyAsync);
+            AddVetMedicineAgencyCommand = new AsyncRelayCommand(AddVetMedicineAgencyAsync);
+            UpdateVetMedicineAgencyCommand = new AsyncRelayCommand(UpdateVetMedicineAgencyAsync);
+            DeleteVetMedicineAgencyCommand = new AsyncRelayCommand(DeleteVetMedicineAgencyAsync);
+
+            // Temporary Zone
+            LoadTemporaryZoneCommand = new AsyncRelayCommand(LoadTemporaryZoneAsync);
+            AddTemporaryZoneCommand = new AsyncRelayCommand(AddTemporaryZoneAsync);
+            UpdateTemporaryZoneCommand = new AsyncRelayCommand(UpdateTemporaryZoneAsync);
+            DeleteTemporaryZoneCommand = new AsyncRelayCommand(DeleteTemporaryZoneAsync);
+
+            // Slaughter
+            LoadSlaughterhouseCommand = new AsyncRelayCommand(LoadSlaughterhouseAsync);
+            AddSlaughterhouseCommand = new AsyncRelayCommand(AddSlaughterhouseAsync);
+            UpdateSlaughterhouseCommand = new AsyncRelayCommand(UpdateSlaughterhouseAsync);
+            DeleteSlaughterhouseCommand = new AsyncRelayCommand(DeleteSlaughterhouseAsync);
+
 
             // Farm
             LoadFarmCommand = new AsyncRelayCommand(LoadFarmAsync);
             AddFarmCommand = new AsyncRelayCommand(AddFarmAsync);
             UpdateFarmCommand = new AsyncRelayCommand(UpdateFarmAsync);
             DeleteFarmCommand = new AsyncRelayCommand(DeleteFarmAsync);
+
+            //Farm condition
+            LoadFarmConditionCommand = new AsyncRelayCommand(LoadFarmConditionAsync);
+            AddFarmConditionCommand = new AsyncRelayCommand(AddFarmConditionAsync);
+            UpdateFarmConditionCommand = new AsyncRelayCommand(UpdateFarmConditionAsync);
+            DeleteFarmConditionCommand = new AsyncRelayCommand(DeleteFarmConditionAsync);
+
+            //Statistic
+            LoadStatisticCommand = new AsyncRelayCommand(LoadStatisticAsync);
+            AddStatisticCommand = new AsyncRelayCommand(AddStatisticAsync);
+            UpdateStatisticCommand = new AsyncRelayCommand(UpdateStatisticAsync);
+            DeleteStatisticCommand = new AsyncRelayCommand(DeleteStatisticAsync);
+
 
 
             // Certificate Command
@@ -72,6 +103,11 @@ namespace disaster_management.ViewModels.ChildViewModels
             await LoadCertificateCommand.ExecuteAsync(null);
             await LoadFarmCommand.ExecuteAsync(null);
             await LoadVeterinaryBranchCommand.ExecuteAsync(null);
+            await LoadVetMedicineAgencyCommand.ExecuteAsync(null);
+            await LoadTemporaryZoneCommand.ExecuteAsync(null);
+            await LoadSlaughterhouseCommand.ExecuteAsync(null);
+            await LoadFarmConditionCommand.ExecuteAsync(null);
+            await LoadStatisticCommand.ExecuteAsync(null);
         }
 
 
@@ -86,6 +122,18 @@ namespace disaster_management.ViewModels.ChildViewModels
 
                 CertificateUpdate.FarmId = FarmItem.FarmId;
                 OnPropertyChanged("CertificateUpdate");
+
+                FarmCondition.FarmId = FarmItem.FarmId;
+                OnPropertyChanged("FarmCondition");
+
+                FarmConditionUpdate.FarmId = FarmItem.FarmId;
+                OnPropertyChanged("FarmConditionUpdate");
+
+                Statistic.FarmId = FarmItem.FarmId;
+                OnPropertyChanged("Statistic");
+
+                StatisticUpdate.FarmId = FarmItem.FarmId;
+                OnPropertyChanged("StatisticUpdate");
             }
         }
 

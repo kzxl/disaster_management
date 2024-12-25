@@ -73,7 +73,7 @@ namespace disaster_management
             // Servername 1: NGUYENMINHCHAUM\SQLEXPRESS pass Admin@1234
             // Servername 2: MYPC\SQLEXPRESS pass 123456
             services.AddDbContext<DaDManagementContext>(options =>
-                options.UseSqlServer("Server=MYPC\\SQLEXPRESS;Database=DaDManagement;User Id=sa;Password=123456;"));
+                options.UseSqlServer("Server=NGUYENMINHCHAUM\\SQLEXPRESS;Database=DaDManagement;User Id=sa;Password=Admin@1234;"));
 
             // Register Repository
             //DiseaseRepository

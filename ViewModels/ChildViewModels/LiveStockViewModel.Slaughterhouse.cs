@@ -67,6 +67,7 @@ namespace disaster_management.ViewModels.ChildViewModels
                 if (_selectedSlaughterhouse != value)
                 {
                     _selectedSlaughterhouse = value;
+                    SlaughterhouseUpdate = value.Clone();
                     OnPropertyChanged();
                 }
             }
@@ -90,6 +91,56 @@ namespace disaster_management.ViewModels.ChildViewModels
         public IAsyncRelayCommand UpdateSlaughterhouseCommand { get; }
         public IAsyncRelayCommand DeleteSlaughterhouseCommand { get; }
         public IAsyncRelayCommand SearchSlaughterhouseCommand { get; }
+
+        #endregion
+
+        #region Methods
+        //Read
+        private async System.Threading.Tasks.Task LoadSlaughterhouseAsync()
+        {
+            SlaughterhouseList = new ObservableCollection<Slaughterhouse>(await slaughterhouseService.GetAllAsync());
+            Pagination_Slaughterhouse = new PaginationHelper<Slaughterhouse>(SlaughterhouseList);
+        }
+        //Create
+        private async System.Threading.Tasks.Task AddSlaughterhouseAsync()
+        {
+            try
+            {
+                await slaughterhouseService.AddAsync(Slaughterhouse);
+                await LoadSlaughterhouseAsync();
+            }
+            catch (Exception)
+            {
+            }
+           
+        }
+        //Update
+        private async System.Threading.Tasks.Task UpdateSlaughterhouseAsync()
+        {
+            try
+            {
+                await slaughterhouseService.UpdateAsync(SlaughterhouseUpdate);
+                await LoadSlaughterhouseAsync();
+            }
+            catch (Exception)
+            {
+            }
+           
+        }
+
+        //  Delete
+        private async System.Threading.Tasks.Task DeleteSlaughterhouseAsync()
+        {
+            try
+            {
+                await slaughterhouseService.DeleteAsync(SelectedSlaughterhouse.SlaughterhouseId);
+                await LoadSlaughterhouseAsync();
+            }
+            catch (Exception)
+            {
+            }
+          
+        }
 
         #endregion
     }

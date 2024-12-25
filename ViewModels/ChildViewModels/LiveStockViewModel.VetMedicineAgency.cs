@@ -7,10 +7,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace disaster_management.ViewModels.ChildViewModels
 {
-    // bac si thu y
+    // Đại lý bán thuốc thú y
     public partial class LiveStockViewModel
     {
         #region Properties
@@ -73,7 +74,7 @@ namespace disaster_management.ViewModels.ChildViewModels
                 SetProperty(ref _SelectedVetMedicineAgency, value);
                 if (value != null)
                 {
-                   // VetMedicineAgencyUpdate = value.Clone(); // Create a copy
+                    VetMedicineAgencyUpdate = value.Clone(); // Create a copy
                    // UserVetMedicineAgencyIDUpdate = (int)VetMedicineAgencyUpdate.VetMedicineAgencyId;
                 }
             }
@@ -102,6 +103,46 @@ namespace disaster_management.ViewModels.ChildViewModels
         public IAsyncRelayCommand UpdateVetMedicineAgencyCommand { get; }
         public IAsyncRelayCommand DeleteVetMedicineAgencyCommand { get; }
         public IAsyncRelayCommand SearchVetMedicineAgencyCommand { get; }
+
+        #endregion
+
+        #region Methods
+
+        // Read
+        private async Task LoadVetMedicineAgencyAsync()
+        {
+            VetMedicineAgencyList = new ObservableCollection<VetMedicineAgency>(await vetMedicineAgencyService.GetAllAsync());
+            Pagination_VetMedicineAgency = new PaginationHelper<VetMedicineAgency>(VetMedicineAgencyList,18);
+        }
+
+        //Add VetMedicineAgency
+        private async Task AddVetMedicineAgencyAsync()
+        {
+            await vetMedicineAgencyService.AddAsync(VetMedicineAgency.Clone());
+            await LoadVetMedicineAgencyAsync();
+        }
+
+        // Update VetMedicineAgency
+        private async Task UpdateVetMedicineAgencyAsync()
+        {
+            await vetMedicineAgencyService.UpdateAsync(VetMedicineAgencyUpdate.Clone());
+            await LoadVetMedicineAgencyAsync();
+        }
+
+        // Delete VetMedicineAgency
+        private async Task DeleteVetMedicineAgencyAsync()
+        {
+            try
+            {
+                await vetMedicineAgencyService.DeleteAsync(SelectedVetMedicineAgency.AgencyId);
+                await LoadVetMedicineAgencyAsync();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Không thể xóa đại lý bán thuoc thú y này");
+            }
+           
+        }
 
         #endregion
     }
