@@ -45,11 +45,18 @@ namespace disaster_management.ViewModels.ChildViewModels
             this.vetMedicineAgencyService = vetMedicineAgencyService;
 
             // Command Register
+            // Chi cục
+            LoadVeterinaryBranchCommand = new AsyncRelayCommand(LoadVeterinaryBranchAsync);
+            AddVeterinaryBranchCommand = new AsyncRelayCommand(AddVeterinaryBranchAsync);
+            UpdateVeterinaryBranchCommand = new AsyncRelayCommand(UpdateVeterinaryBranchAsync);
+            DeleteVeterinaryBranchCommand = new AsyncRelayCommand(DeleteVeterinaryBranchAsync);
+
+
             // Farm
             LoadFarmCommand = new AsyncRelayCommand(LoadFarmAsync);
-          //  AddFarmCommand = new AsyncRelayCommand(AddFarmAsync);
-         //   UpdateFarmCommand = new AsyncRelayCommand(UpdateFarmAsync);
-         //   DeleteFarmCommand = new AsyncRelayCommand(DeleteFarmAsync);
+            AddFarmCommand = new AsyncRelayCommand(AddFarmAsync);
+            UpdateFarmCommand = new AsyncRelayCommand(UpdateFarmAsync);
+            DeleteFarmCommand = new AsyncRelayCommand(DeleteFarmAsync);
 
 
             // Certificate Command
@@ -64,6 +71,7 @@ namespace disaster_management.ViewModels.ChildViewModels
         {
             await LoadCertificateCommand.ExecuteAsync(null);
             await LoadFarmCommand.ExecuteAsync(null);
+            await LoadVeterinaryBranchCommand.ExecuteAsync(null);
         }
 
 

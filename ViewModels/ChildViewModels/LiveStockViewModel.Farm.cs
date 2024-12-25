@@ -81,6 +81,7 @@ namespace disaster_management.ViewModels.ChildViewModels
                 if (_SelectedFarm != value)
                 {
                     _SelectedFarm = value;
+                    FarmUpdate = value.Clone();
                     OnPropertyChanged();
                 }
             }
@@ -100,6 +101,21 @@ namespace disaster_management.ViewModels.ChildViewModels
         {
             FarmList = new ObservableCollection<LivestockFarm>(await livestockFarmService.GetAllAsync());
             Pagination_Farm = new PaginationHelper<LivestockFarm>(FarmList,18);
+        }
+        private async Task AddFarmAsync()
+        {
+            await livestockFarmService.AddAsync(Farm.Clone());
+            await LoadFarmAsync();
+        }
+        private async Task UpdateFarmAsync()
+        {
+            await livestockFarmService.UpdateAsync(FarmUpdate.Clone());
+            await LoadFarmAsync();
+        }
+        private async Task DeleteFarmAsync()
+        {
+            await livestockFarmService.DeleteAsync(SelectedFarm.FarmId);
+            await LoadFarmAsync();
         }
         #endregion
     }

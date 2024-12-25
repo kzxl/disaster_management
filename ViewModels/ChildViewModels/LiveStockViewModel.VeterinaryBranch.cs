@@ -107,5 +107,52 @@ namespace disaster_management.ViewModels.ChildViewModels
         public IAsyncRelayCommand SearchVeterinaryBranchCommand { get; }
 
         #endregion
+
+        private async Task LoadVeterinaryBranchAsync()
+        {
+            VeterinaryBranchList =
+                new ObservableCollection<VeterinaryBranch>(
+                    await veterinaryBranchService.GetAllAsync());
+            Pagination_VeterinaryBranch = new PaginationHelper<VeterinaryBranch>(VeterinaryBranchList,18);
+        }
+        // Add Veterinary Branch
+        private async Task AddVeterinaryBranchAsync()
+        {
+            try
+            {
+                await veterinaryBranchService.AddAsync(VeterinaryBranch.Clone());
+                await LoadVeterinaryBranchAsync();
+            }
+            catch (Exception ex)
+            {
+              //  await DialogService.ShowMessageAsync(ex.Message);
+            }
+        }
+        // Update Veterinary Branch
+        private async Task UpdateVeterinaryBranchAsync()
+        {
+            try
+            {
+                await veterinaryBranchService.UpdateAsync(VeterinaryBranchUpdate.Clone());
+                await LoadVeterinaryBranchAsync();
+            }
+            catch (Exception ex)
+            {
+                //  await DialogService.ShowMessageAsync(ex.Message);
+            }
+        }
+        // Delete Veterinary Branch
+        private async Task DeleteVeterinaryBranchAsync()
+        {
+            try
+            {
+                await veterinaryBranchService.DeleteAsync(SelectedVeterinaryBranch.BranchId);
+                await LoadVeterinaryBranchAsync();
+            }
+            catch (Exception ex)
+            {
+                //  await DialogService.ShowMessageAsync(ex.Message);
+            }
+        }
     }
 }

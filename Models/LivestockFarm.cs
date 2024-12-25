@@ -21,5 +21,10 @@ namespace disaster_management.Models
         public virtual ICollection<Certificate> Certificates { get; set; }
         public virtual ICollection<LivestockFarmCondition> LivestockFarmConditions { get; set; }
         public virtual ICollection<LivestockStatistic> LivestockStatistics { get; set; }
+
+        public LivestockFarm Clone()
+        {
+            return (LivestockFarm)this.MemberwiseClone();   
+        }
     }
 }
