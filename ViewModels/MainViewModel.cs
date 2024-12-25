@@ -1,30 +1,29 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using disaster_management.ViewModels.ChildViewModels;
+using disaster_management.ViewModels.ChildViewModels.Disaster;
+using disaster_management.ViewModels.ChildViewModels.Users;
 
 namespace disaster_management.ViewModels
 {
     public class MainViewModel : ObservableObject
     {
 
-        // private readonly IServiceProvider _serviceProvider;
+        public DisasterViewModel DisasterViewModel { get; }
         public DiseaseViewModel DiseaseViewModel { get; }
         public LiveStockViewModel LiveStockViewModel { get; }
-        public MainViewModel(DiseaseViewModel diseaseViewModel, LiveStockViewModel liveStockViewModel)
+        public UserViewModel UserViewModel { get; }
+
+
+        public MainViewModel(DiseaseViewModel diseaseViewModel, 
+            LiveStockViewModel liveStockViewModel,
+            DisasterViewModel disasterViewModel,
+            UserViewModel userViewModel)
         {
             DiseaseViewModel = diseaseViewModel;
             LiveStockViewModel = liveStockViewModel;
+            DisasterViewModel = disasterViewModel;
+            UserViewModel = userViewModel;
         }
 
-        // Lazy load if you like
-
-        //  Lazy Initialization cho DiseaseViewModel
-        //private DiseaseViewModel? _diseaseViewModel;
-        //public DiseaseViewModel? DiseaseViewModel =>
-        //    _diseaseViewModel ??= _serviceProvider.GetRequiredService<DiseaseViewModel>();
-
-        ////  Lazy Initialization cho LiveStockViewModel
-        //private LiveStockViewModel? _liveStockViewModel;
-        //public LiveStockViewModel? LiveStockViewModel =>
-        //    _liveStockViewModel ??= _serviceProvider.GetRequiredService<LiveStockViewModel>();
     }
 }

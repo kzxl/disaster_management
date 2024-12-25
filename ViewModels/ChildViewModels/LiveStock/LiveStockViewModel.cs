@@ -88,7 +88,12 @@ namespace disaster_management.ViewModels.ChildViewModels
             UpdateStatisticCommand = new AsyncRelayCommand(UpdateStatisticAsync);
             DeleteStatisticCommand = new AsyncRelayCommand(DeleteStatisticAsync);
 
-
+            //Safe Livestock Zone
+            LoadSafeLivestockZoneCommand = new AsyncRelayCommand(LoadSafeLivestockZoneAsync);
+            AddSafeLivestockZoneCommand = new AsyncRelayCommand(AddSafeLivestockZoneAsync);
+            UpdateSafeLivestockZoneCommand = new AsyncRelayCommand(UpdateSafeLivestockZoneAsync);
+            DeleteSafeLivestockZoneCommand = new AsyncRelayCommand(DeleteSafeLivestockZoneAsync);
+         //   SearchSafeLivestockZoneCommand = new AsyncRelayCommand(SearchSafeLivestockZoneAsync);
 
             // Certificate Command
             LoadCertificateCommand = new AsyncRelayCommand(LoadCertificateAsync);
@@ -108,6 +113,7 @@ namespace disaster_management.ViewModels.ChildViewModels
             await LoadSlaughterhouseCommand.ExecuteAsync(null);
             await LoadFarmConditionCommand.ExecuteAsync(null);
             await LoadStatisticCommand.ExecuteAsync(null);
+            await LoadSafeLivestockZoneCommand.ExecuteAsync(null);
         }
 
 

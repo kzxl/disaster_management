@@ -22,6 +22,7 @@ namespace disaster_management.ViewModels.ChildViewModels
             get => _Pagination_SafeLivestockZone;
             set => SetProperty(ref _Pagination_SafeLivestockZone, value);
         }
+
         // List of Veterinary Branches
         private ObservableCollection<SafeLivestockZone> _SafeLivestockZoneList;
         public ObservableCollection<SafeLivestockZone> SafeLivestockZoneList
@@ -74,7 +75,9 @@ namespace disaster_management.ViewModels.ChildViewModels
             {
                 SetProperty(ref _SelectedSafeLivestockZone, value);
                 if (value != null)
+
                 {
+                    SafeLivestockZoneUpdate = value.Clone();
                 //    VeterinaryBranchUpdate = value.Clone(); // Create a copy
                 }
             }
@@ -95,6 +98,8 @@ namespace disaster_management.ViewModels.ChildViewModels
             }
         }
 
+
+        #endregion
         #region Command
         public IAsyncRelayCommand LoadSafeLivestockZoneCommand { get; }
         public IAsyncRelayCommand AddSafeLivestockZoneCommand { get; }
@@ -104,6 +109,50 @@ namespace disaster_management.ViewModels.ChildViewModels
 
         #endregion
 
+        #region Methods
+
+        private async Task LoadSafeLivestockZoneAsync()
+        {
+            Pagination_SafeLivestockZone = new PaginationHelper<SafeLivestockZone>(await safeLivestockZoneService.GetAllAsync());
+        }
+
+        private async Task AddSafeLivestockZoneAsync()
+        {
+            try
+            {
+                await safeLivestockZoneService.AddAsync(SafeLivestockZone);
+                await LoadSafeLivestockZoneAsync();
+            }
+            catch (Exception)
+            {
+            }
+           
+        }
+
+        private async Task UpdateSafeLivestockZoneAsync()
+        {
+            try
+            {
+                await safeLivestockZoneService.UpdateAsync(SafeLivestockZoneUpdate);
+                await LoadSafeLivestockZoneAsync();
+            }
+            catch (Exception)
+            {
+            }
+        
+        }
+
+        private async Task DeleteSafeLivestockZoneAsync()
+        {
+            try
+            {
+                await safeLivestockZoneService.DeleteAsync(SelectedSafeLivestockZone.ZoneId);
+                await LoadSafeLivestockZoneAsync();
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         #endregion
 

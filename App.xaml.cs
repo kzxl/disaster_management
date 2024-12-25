@@ -3,11 +3,16 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using disaster_management.Models;
+using disaster_management.Repositories.Disater;
 using disaster_management.Repositories.Disease;
 using disaster_management.Repositories.Livestock;
+using disaster_management.Repositories.Users;
 using disaster_management.Services;
 using disaster_management.ViewModels;
 using disaster_management.ViewModels.ChildViewModels;
+using disaster_management.ViewModels.ChildViewModels.Disaster;
+using disaster_management.ViewModels.ChildViewModels.Users;
+using disaster_management.Views;
 using disaster_management.Views.Usercontrols;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,9 +36,20 @@ namespace disaster_management
                 Shutdown();
                 return;
             }
-
-         
+            // Launch the login window
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            var loginWindow = new LoginWindow();
+            var result = loginWindow.ShowDialog();
+
+            // If login failed or user canceled
+            if (result != true)
+            {
+                Shutdown();
+                return;
+            }
+
+           
+            MainWindow = mainWindow; // Đặt MainWindow để quản lý vòng đời
             mainWindow.Show();
 
             base.OnStartup(e);
@@ -73,9 +89,14 @@ namespace disaster_management
             // Servername 1: NGUYENMINHCHAUM\SQLEXPRESS pass Admin@1234
             // Servername 2: MYPC\SQLEXPRESS pass 123456
             services.AddDbContext<DaDManagementContext>(options =>
-                options.UseSqlServer("Server=NGUYENMINHCHAUM\\SQLEXPRESS;Database=DaDManagement;User Id=sa;Password=Admin@1234;"));
+                options.UseSqlServer("Server=MYPC\\SQLEXPRESS;Database=DaDManagement;User Id=sa;Password=123456;"));
 
-            // Register Repository
+            // Disaster Repository
+            services.AddSingleton<DisasterPointRepository>();
+            services.AddSingleton<ReportRepository>();
+            services.AddSingleton<FileAttachmentRepository>();
+
+
             //DiseaseRepository
             services.AddSingleton<DiseaseRepository>();
             services.AddSingleton<OutbreakDiagnosisRepository>();
@@ -93,10 +114,21 @@ namespace disaster_management
             services.AddSingleton<TemporaryZoneRepository>();
             services.AddSingleton<VeterinaryBranchRepository>();
             services.AddSingleton<VetMedicineAgencyRepository>();
-           
+
+            //User Repository
+            services.AddSingleton<UserRepository>();
+            services.AddSingleton<UserGroupsRepository>();
+            services.AddSingleton<UserLogsRepository>();
+            services.AddSingleton<UserRolesRepository>();
 
 
-            // Register for Services
+            #region Services
+
+            //DisasterService
+            services.AddSingleton<IDisasterPointService, DisasterService>();
+            services.AddSingleton<IFileAttachmentService, DisasterService>();
+            services.AddSingleton<IReportService, DisasterService>();
+
             //DiseaseService
             services.AddSingleton<IDiseaseTypeService, DiseaseService>();
             services.AddSingleton<IOutbreakDiagnosisService, DiseaseService>();
@@ -115,11 +147,21 @@ namespace disaster_management
             services.AddSingleton<IVeterinaryBranchService, LivestockService>();
             services.AddSingleton<IVetMedicineAgencyService, LivestockService>();
 
+            //User service
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IUserGroupService, UserService>();
+            services.AddSingleton<IUserLogService, UserService>();
+            services.AddSingleton<IUserRoleService, UserService>();
+
+            #endregion
 
             //// Viewmodel registration
             services.AddSingleton<DiseaseViewModel>();
             services.AddSingleton<LiveStockViewModel>();
-           
+            services.AddSingleton<DisasterViewModel>();
+            services.AddSingleton<UserViewModel>();
+
+
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<MainWindow>();
 

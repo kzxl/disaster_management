@@ -12,5 +12,10 @@ namespace disaster_management.Models
         public int? ReportId { get; set; }
 
         public virtual Report? Report { get; set; }
+
+        public FileAttachment Clone()
+        {
+            return (FileAttachment)this.MemberwiseClone();
+        }
     }
 }

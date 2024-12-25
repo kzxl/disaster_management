@@ -24,12 +24,30 @@
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <!--  TITLE APP  -->
-        <Grid Background="AliceBlue">
+        <Grid Background="AliceBlue" DataContext="{Binding UserViewModel}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
             <TextBlock
+                Grid.Column="1"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="30"
                 Text="Quản Lý Thiên Tai - Dịch Bệnh" />
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="14" Text="Current User: " />
+                    <TextBlock FontSize="14" FontWeight="Bold" Foreground="Green" Text="{Binding CurrentUser.Username}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  FontSize="14" Text="User Role: " />
+                    <TextBlock FontSize="14" FontWeight="Bold" Foreground="Green" Text="{Binding UserRole.RoleName}" />
+                </StackPanel>
+
+            </StackPanel>
+
         </Grid>
         <!--  Content  -->
         <Grid Grid.Row="1">
@@ -209,24 +227,12 @@
 
             <!--  User control Menu  -->
             <Grid Grid.Column="1">
-                <uc:DisasterManagement  Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=1}" />
-                <uc:DiseaseManagement DataContext="{Binding DiseaseViewModel}"  Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=2}" />
+                <Image Height="500" Width="500" Source="/Views/Images/Drawing1.png" />
+
+                <uc:DisasterManagement DataContext="{Binding DisasterViewModel}" Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=1}" />
+                <uc:DiseaseManagement DataContext="{Binding DiseaseViewModel}" Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=2}" />
                 <uc:LivestockManagement DataContext="{Binding LiveStockViewModel}" Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=3}" />
-                <!--<Button
-                    x:Name="button"
-                    Margin="128,117,1008,588"
-                    Command="{Binding TriggerChildCommand}"
-                    Content="Button"
-                    RenderTransformOrigin="0.5,0.5">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="1" />
-                            <SkewTransform />
-                            <RotateTransform Angle="3.327" />
-                            <TranslateTransform />
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                </Button>-->
+                <uc:SystemManagement DataContext="{Binding UserViewModel}" Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=4}" />
             </Grid>
             <!--  END User control Menu  -->
 

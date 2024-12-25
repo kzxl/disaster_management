@@ -65,16 +65,20 @@
                         FontSize="14">
                         Bộ lọc tình trạng thiên tai:
                     </TextBlock>
-                    <ComboBox
-                        Width="160"
-                        Height="30"
-                        Margin="20,0,0,0"
-                        VerticalAlignment="Center"
-                        FontSize="14"
-                        Style="{StaticResource MahApps.Styles.ComboBox}">
-                        <ComboBoxItem IsSelected="True">Trượt lỡ</ComboBoxItem>
-                        <ComboBoxItem>Lũ quét</ComboBoxItem>
-                    </ComboBox>
+                    <!--  Timf kieems  -->
+                    <StackPanel
+                        Margin="10,10,0,0"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+
+                        <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
+                        <Button
+                            Width="90"
+                            Margin="5,0,0,0"
+                            Content="Tìm Kiếm"
+                            FontSize="16"
+                            Style="{StaticResource MahApps.Styles.Button}" />
+                    </StackPanel>
                 </StackPanel>
 
                 <GroupBox
@@ -89,7 +93,9 @@
                         <DataGrid
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            Background="AliceBlue" />
+                            Background="AliceBlue"
+                            ItemsSource="{Binding Pagination_DisasterPoint.PagedItems}"
+                            SelectedItem="{Binding SelectedDisasterPoint}" />
                         <!--  phan trang  -->
                         <StackPanel
                             Grid.Row="1"
@@ -127,20 +133,7 @@
                 <StackPanel>
 
 
-                    <!--  Timf kieems  -->
-                    <StackPanel
-                        Margin="10,10,0,0"
-                        VerticalAlignment="Top"
-                        Orientation="Horizontal">
 
-                        <TextBox Width="190" Style="{StaticResource MahApps.Styles.TextBox}" />
-                        <Button
-                            Width="90"
-                            Margin="5,0,0,0"
-                            Content="Tìm Kiếm"
-                            FontSize="16"
-                            Style="{StaticResource MahApps.Styles.Button}" />
-                    </StackPanel>
                     <!--  Thao tac  -->
 
 

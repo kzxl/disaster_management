@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Views\Images\coronavirus.png" />
     <None Remove="Views\Images\cow.png" />
+    <None Remove="Views\Images\Drawing1.png" />
     <None Remove="Views\Images\extreme-weather.png" />
     <None Remove="Views\Images\global.png" />
     <None Remove="Views\Images\house.png" />
@@ -38,11 +39,16 @@
   <ItemGroup>
     <Resource Include="Views\Images\coronavirus.png" />
     <Resource Include="Views\Images\cow.png" />
+    <Resource Include="Views\Images\Drawing1.png" />
     <Resource Include="Views\Images\extreme-weather.png" />
     <Resource Include="Views\Images\global.png" />
     <Resource Include="Views\Images\house.png" />
     <Resource Include="Views\Images\log-out.png" />
     <Resource Include="Views\Images\question-mark.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\ChildViewModels\Location\" />
   </ItemGroup>
 
 </Project>
