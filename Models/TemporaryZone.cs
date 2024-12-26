@@ -9,5 +9,10 @@ namespace disaster_management.Models
         public string ZoneName { get; set; } = null!;
         public string? Address { get; set; }
         public int? Capacity { get; set; }
+
+        internal TemporaryZone Clone()
+        {
+            return (TemporaryZone)this.MemberwiseClone();  
+        }
     }
 }

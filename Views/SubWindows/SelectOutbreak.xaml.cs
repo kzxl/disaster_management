@@ -21,10 +21,14 @@ namespace disaster_management.Views.SubWindows
     /// </summary>
     public partial class SelectOutbreak : MetroWindow
     {
-        public SelectOutbreak(DiseaseViewModel viewModel)
+        public SelectOutbreak()
         {
             InitializeComponent();
-            DataContext = viewModel;
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

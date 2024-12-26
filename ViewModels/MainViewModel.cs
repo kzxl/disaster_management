@@ -1,34 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using disaster_management.ViewModels.ChildViewModels;
-using Microsoft.Extensions.DependencyInjection;
+using disaster_management.ViewModels.ChildViewModels.Disaster;
+using disaster_management.ViewModels.ChildViewModels.Users;
 
 namespace disaster_management.ViewModels
 {
     public class MainViewModel : ObservableObject
     {
- 
-        private readonly IServiceProvider _serviceProvider;
-        public MainViewModel(IServiceProvider serviceProvider)
+
+        public DisasterViewModel DisasterViewModel { get; }
+        public DiseaseViewModel DiseaseViewModel { get; }
+        public LiveStockViewModel LiveStockViewModel { get; }
+        public UserViewModel UserViewModel { get; }
+
+
+        public MainViewModel(DiseaseViewModel diseaseViewModel, 
+            LiveStockViewModel liveStockViewModel,
+            DisasterViewModel disasterViewModel,
+            UserViewModel userViewModel)
         {
-            _serviceProvider = serviceProvider;
-            TriggerChildCommand = new RelayCommand(ExecuteChildCommand);
-        }
-
-      //  Lazy Initialization cho DiseaseViewModel
-        private DiseaseViewModel? _diseaseViewModel;
-        public DiseaseViewModel? DiseaseViewModel =>
-            _diseaseViewModel ??= _serviceProvider.GetRequiredService<DiseaseViewModel>();
-
-
-
-
-        // Command để thao tác với DiseaseViewModel
-        public RelayCommand TriggerChildCommand { get; }
-
-        private void ExecuteChildCommand()
-        {
-            DiseaseViewModel?.LoadDiseasesCommand.Execute(null);
+            DiseaseViewModel = diseaseViewModel;
+            LiveStockViewModel = liveStockViewModel;
+            DisasterViewModel = disasterViewModel;
+            UserViewModel = userViewModel;
         }
 
     }

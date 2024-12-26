@@ -16,5 +16,10 @@ namespace disaster_management.Models
         public int? ReportId { get; set; }
 
         public virtual Report? Report { get; set; }
+
+        internal DisasterPoint Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

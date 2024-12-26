@@ -19,5 +19,10 @@ namespace disaster_management.Models
 
         public virtual ICollection<DisasterPoint> DisasterPoints { get; set; }
         public virtual ICollection<FileAttachment> FileAttachments { get; set; }
+
+        public Report Clone()
+        {
+            return (Report)this.MemberwiseClone();
+        }
     }
 }

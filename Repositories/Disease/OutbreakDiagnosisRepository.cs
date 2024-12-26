@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace disaster_management.Repositories
+namespace disaster_management.Repositories.Disease
 {
     public class OutbreakDiagnosisRepository : Repository<OutbreakDiagnosis>
     {
         private readonly DaDManagementContext _context;
-        public OutbreakDiagnosisRepository(DaDManagementContext context) : base(context) 
+        public OutbreakDiagnosisRepository(DbContextOptions<DaDManagementContext> context) : base(context)
         {
-            _context = context;
+            _context = new DaDManagementContext(context);
         }
 
         public async Task<IEnumerable<OutbreakDiagnosis>> GetByResultSearch(string keyword)

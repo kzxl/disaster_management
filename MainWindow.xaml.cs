@@ -23,6 +23,7 @@ namespace disaster_management
         public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
+         
             DataContext = viewModel; // Gán ViewModel làm DataContext cho View
         }
     }

@@ -1,22 +1,19 @@
 ﻿using disaster_management.DTOs;
 using disaster_management.Models;
-using disaster_management.Repositories;
+using disaster_management.Repositories.Disease;
 
 namespace disaster_management.Services
 {
     public interface IDiseaseTypeService
     {
-        // DiseaseType
         Task<IEnumerable<DiseaseType>> GetAllAsync();
         Task<DiseaseType?> GetByIdAsync(int id);
         Task AddAsync(DiseaseType entity);
         Task UpdateAsync(DiseaseType entity);
         Task DeleteAsync(int id);
         Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword);
-        //
-
-
     }
+
     public interface IOutbreakDiagnosisService
     {
         Task<IEnumerable<OutbreakDiagnosis>> GetAllAsync();
@@ -87,11 +84,11 @@ namespace disaster_management.Services
         }
 
         #region Kieu dịch bệnh
-        public async Task<IEnumerable<DiseaseType>> GetAllAsync()
+        async Task<IEnumerable<DiseaseType>> IDiseaseTypeService.GetAllAsync()
         {
             return await _repositoryDiseaseType.GetAllAsync();
         }
-        public async Task<DiseaseType?> GetByIdAsync(int id)
+        async Task<DiseaseType?> IDiseaseTypeService.GetByIdAsync(int id)
         {
             return await _repositoryDiseaseType.GetByIdAsync(id);
         }
@@ -107,7 +104,7 @@ namespace disaster_management.Services
         {
             await _repositoryDiseaseType.DeleteAsync(id);
         }
-        public async Task<IEnumerable<DiseaseType>> GetByNameSearch(string keyword)
+        async Task<IEnumerable<DiseaseType>> IDiseaseTypeService.GetByNameSearch(string keyword)
         {
             return await _repositoryDiseaseType.GetByNameSearch(keyword);
         }
@@ -134,6 +131,10 @@ namespace disaster_management.Services
         public async Task<IEnumerable<OutbreakDiagnosis>> GetByResultSearch(string keyword)
         {
             return await _repositoryOutbreakDiagnosis.GetByResultSearch(keyword);
+        }
+         async Task IOutbreakDiagnosisService.DeleteAsync(int id)
+        {
+            await _repositoryOutbreakDiagnosis.DeleteAsync(id);
         }
         #endregion
 
@@ -193,11 +194,16 @@ namespace disaster_management.Services
         {
             return await _repositorySymptom.GetByNameSearch(keyword);
         }
+
+        async Task ISymptomService.DeleteAsync(int id)
+        {
+            await _repositorySymptom.DeleteAsync(id);
+        }
         #endregion
 
 
         #region Vaccination
-       
+
         async Task<IEnumerable<Vaccination>> IVaccinationService.GetAllAsync()
         {
             return await _repositoryVaccination.GetAllAsync();
@@ -217,6 +223,10 @@ namespace disaster_management.Services
         Task<IEnumerable<Vaccination>> IVaccinationService.GetByNameSearch(string keyword)
         {
             return _repositoryVaccination.GetByNameSearch(keyword);
+        }
+        async Task IVaccinationService.DeleteAsync(int id)
+        {
+            await _repositoryVaccination.DeleteAsync(id);
         }
         #endregion
     }

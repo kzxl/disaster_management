@@ -7,7 +7,7 @@ namespace disaster_management.Models
     {
         public int DiagnosisId { get; set; }
         public string? DiagnosisResult { get; set; }
-        public DateTime DiagnosisDate { get; set; }
+        public DateTime DiagnosisDate { get; set; } = DateTime.Now;
         public string? DoctorName { get; set; }
         public int? OutbreakId { get; set; }
 

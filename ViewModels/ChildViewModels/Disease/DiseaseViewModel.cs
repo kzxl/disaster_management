@@ -28,42 +28,63 @@ namespace disaster_management.ViewModels.ChildViewModels
             _outbreakService = outbreakService;
             _symptomService = symptomService;
             _vaccinationService = vaccinationService;
-           
-            // Load danh sách dịch bệnh
+
+            // Disease
             LoadDiseasesCommand = new AsyncRelayCommand(GetAllDiseasesAsync); // First load
-           
-
-            // Load danh sách chuản đoán
-            LoadODCommand = new AsyncRelayCommand(GetAllODAsync);
-            LoadOutBreakCommand = new AsyncRelayCommand(GetAllOutBreakAsync);
-
-            InitializeAsync();
-
             UpdateDiseaseCommand = new AsyncRelayCommand(UpdateDiseaseAsync);
             AddDiseaseCommand = new AsyncRelayCommand(AddDiseaseAsync);
             DelDiseaseCommand = new AsyncRelayCommand(DeleteDiseaseAsync);
-
-            // paging command
             MoveFirstCommand = new RelayCommand(MoveFirst);
             MovePreviousCommand = new RelayCommand(MovePrevious);
             MoveNextCommand = new RelayCommand(MoveNext);
             MoveLastCommand = new RelayCommand(MoveLast);
-
-            // Search
             SearchNameCommand = new AsyncRelayCommand(GetBySearchNameAsync);
 
-            OpenPopupSelectDiseaseCommand = new RelayCommand(OpenPopupSelectDisease);
+            // Outbreak command 
+            LoadOutBreakCommand = new AsyncRelayCommand(GetAllOutBreakAsync);
             AddOutbreakCommand = new AsyncRelayCommand(AddOutBreakAsync);
             DeleteOutbreakCommand = new AsyncRelayCommand(DeleteOutbreakAsync);
+            UpdateOutbreakCommand = new AsyncRelayCommand(UpdateOutbreakAsync);
+            SearchOutbreakCommand = new AsyncRelayCommand(SearchNameOutbreakAsync);
+            MoveFirstCommand_Outbreak = new RelayCommand(MoveFirst_Outbreak);
+            MovePreviousCommand_Outbreak = new RelayCommand(MovePrevious_Outbreak);
+            MoveNextCommand_Outbreak = new RelayCommand(MoveNext_Outbreak);
+            MoveLastCommand_Outbreak = new RelayCommand(MoveLast_Outbreak);
+            OpenPopupSelectDiseaseCommand = new RelayCommand(OpenPopupSelectDisease);
+
+            // Outbreak Diagnosis
+            LoadODCommand = new AsyncRelayCommand(GetAllOutBreakDiaAsync);
+            SelectOutbreakIDCommand = new RelayCommand(OpenPopupSelectOutbreakID);
+            AddOutbreakDiaCommand = new AsyncRelayCommand(AddOutBreakDiaAsync);
+            UpdateOutbreakDiaCommand = new AsyncRelayCommand(UpdateOutbreakDiaAsync);
+            DeleteOutbreakDiaCommand = new AsyncRelayCommand(DeleteOutbreakDiaAsync);
+            SearchOutbreakDiaCommand = new AsyncRelayCommand(SearchNameOutbreakDiaAsync);
+
+            //Symptom
+            LoadSymptomCommand = new AsyncRelayCommand(GetAllSymptomAsync);
+            AddSymptomCommand = new AsyncRelayCommand(AddSymptomAsync);
+            UpdateSymptomCommand = new AsyncRelayCommand(UpdateSymptomAsync);
+            DeleteSymptomCommand = new AsyncRelayCommand(DeleteSymptomAsync);
+            SearchSymptomCommand = new AsyncRelayCommand(SearchNameSymptomAsync);
+
+            //Vaccination
+            LoadVaccinationCommand = new AsyncRelayCommand(GetAllVaccinationAsync);
+            AddVaccinationCommand = new AsyncRelayCommand(AddVaccinationAsync);
+            UpdateVaccinationCommand = new AsyncRelayCommand(UpdateVaccinationAsync);
+            DeleteVaccinationCommand = new AsyncRelayCommand(DeleteVaccinationAsync);
+            SearchVaccinationCommand = new AsyncRelayCommand(SearchNameVaccinationAsync);
 
 
+            InitializeAsync();
         }
+
         private async void InitializeAsync()
         {
             await LoadDiseasesCommand.ExecuteAsync(null);
             await LoadOutBreakCommand.ExecuteAsync(null);
             await LoadODCommand.ExecuteAsync(null);
-           
+            await LoadSymptomCommand.ExecuteAsync(null);
+            await LoadVaccinationCommand.ExecuteAsync(null);
         }
 
         #region Prop
@@ -115,13 +136,13 @@ namespace disaster_management.ViewModels.ChildViewModels
             set
             {
                 SetProperty(ref _SelectedDisease, value);
-                if(value!= null)
+                if (value != null)
                 {
                     Disease = value.Clone(); // Create a copy
                     GetSeverityIndex(SelectedDisease);
                     GetGroupIndex(SelectedDisease);
                 }
-             
+
             }
         }
 
@@ -132,8 +153,8 @@ namespace disaster_management.ViewModels.ChildViewModels
             set
             {
                 SetProperty(ref _SelectedDiseaseAdd, value);
-              //  Disease = value.Clone(); // Create a copy
-             
+                //  Disease = value.Clone(); // Create a copy
+
             }
         }
 
@@ -147,7 +168,7 @@ namespace disaster_management.ViewModels.ChildViewModels
 
         // Update Data
 
-        private DiseaseType _Disease = new() ;
+        private DiseaseType _Disease = new();
         public DiseaseType Disease
         {
             get { return _Disease; }
@@ -303,10 +324,10 @@ namespace disaster_management.ViewModels.ChildViewModels
             {
                 return;
             }
-            var diseases =  await _diseaseService.GetByNameSearch(KeywordName);
+            var diseases = await _diseaseService.GetByNameSearch(KeywordName);
             Diseases = new ObservableCollection<DiseaseType>(diseases);
             Pagination = new PaginationHelper<DiseaseType>(Diseases, 18);
-       
+
         }
 
         //Update disease data
@@ -314,7 +335,7 @@ namespace disaster_management.ViewModels.ChildViewModels
 
         private async Task UpdateDiseaseAsync()
         {
-       
+
             if (_diseaseService is null)
             {
                 return;
@@ -339,7 +360,7 @@ namespace disaster_management.ViewModels.ChildViewModels
             }
             var question = MessageBox.Show("Bạn muốn thêm dữ liệu dịch bệnh ?", "Thêm Dữ Liệu", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (question == MessageBoxResult.Cancel) return;
-          
+
             SetSeverity(DiseaseSeverityIndexAdd);
             SetDiseaseGroup(DiseaseGroupIndexAdd);
             await _diseaseService.AddAsync(DiseaseAdd.Clone()); // Clone to keep the value from changing

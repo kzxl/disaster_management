@@ -9,5 +9,10 @@ namespace disaster_management.Models
         public string BranchName { get; set; } = null!;
         public string? Address { get; set; }
         public string? Phone { get; set; }
+
+        public VeterinaryBranch Clone()
+        {
+           return (VeterinaryBranch)this.MemberwiseClone();
+        }
     }
 }
